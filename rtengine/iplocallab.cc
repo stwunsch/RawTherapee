@@ -8646,16 +8646,17 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
                 }
 
             //  int DaubLen = 6;
+            int levR = levred;
+            if(levred == 7) levR = 6;
 
-            int levwavL = levred;
+            int levwavL = levR;
             int skip = 1;
 
             wavelet_decomposition Ldecomp(tmp1.L[0], tmp1.W, tmp1.H, levwavL, 1, skip, numThreads, lp.daubLen);
             wavelet_decomposition adecomp(tmp1.a[0], tmp1.W, tmp1.H, levwavL, 1, skip, numThreads, lp.daubLen);
             wavelet_decomposition bdecomp(tmp1.b[0], tmp1.W, tmp1.H, levwavL, 1, skip, numThreads, lp.daubLen);
-
             float madL[10][3];
-            int edge = 2;
+            int edge = 6;
 
             if (!Ldecomp.memory_allocation_failed()) {
                 
@@ -8663,7 +8664,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
                 #pragma omp parallel for schedule(dynamic) collapse(2) if (multiThread)
 #endif
 
-                for (int lvl = 0; lvl < levred; lvl++) {
+                for (int lvl = 0; lvl < levR; lvl++) {
                     for (int dir = 1; dir < 4; dir++) {
                         int Wlvl_L = Ldecomp.level_W(lvl);
                         int Hlvl_L = Ldecomp.level_H(lvl);
@@ -8679,7 +8680,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
 
                 if (aut == 0) {
                     if (levred == 7) {
-                        edge = 2;
+                        edge = 6;
                         vari[0] = 0.8f * SQR((lp.noiself0 / 125.0) * (1.0 + lp.noiself0 / 25.0));
                         vari[1] = 0.8f * SQR((lp.noiself / 125.0) * (1.0 + lp.noiself / 25.0));
                         vari[2] = 0.8f * SQR((lp.noiself2 / 125.0) * (1.0 + lp.noiself2 / 25.0));
@@ -8697,7 +8698,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
 
                     }
                 } else if (aut == 1  || aut == 2) {
-                    edge = 2;
+                    edge = 6;
                     vari[0] = SQR(slidL[0]);
                     vari[1] = SQR(slidL[1]);
                     vari[2] = SQR(slidL[2]);
@@ -8883,7 +8884,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
 
                 if (aut == 0) {
                     if (levred == 7) {
-                        edge = 2;
+                        edge = 6;
                         variC[0] = SQR(noisecfr);
                         variC[1] = SQR(noisecfr);
                         variC[2] = SQR(noisecfr);
@@ -8916,7 +8917,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
 
                     }
                 } else if (aut == 1  || aut == 2) {
-                    edge = 2;
+                    edge = 6;
                     variC[0] = SQR(slida[0]);
                     variC[1] = SQR(slida[1]);
                     variC[2] = SQR(slida[2]);
@@ -9260,21 +9261,23 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
                     }
 
                 //   int DaubLen = 6;
+                int levR = levred;
+                if(levred == 7) levR = 6;
 
-                int levwavL = levred;
+                int levwavL = levR;
                 int skip = 1;
                 wavelet_decomposition Ldecomp(bufwv.L[0], bufwv.W, bufwv.H, levwavL, 1, skip, numThreads, lp.daubLen);
                 wavelet_decomposition adecomp(bufwv.a[0], bufwv.W, bufwv.H, levwavL, 1, skip, numThreads, lp.daubLen);
                 wavelet_decomposition bdecomp(bufwv.b[0], bufwv.W, bufwv.H, levwavL, 1, skip, numThreads, lp.daubLen);
                 float madL[10][3];
-                int edge = 2;
+                int edge = 6;
 
                 if (!Ldecomp.memory_allocation_failed()) {
 #ifdef _OPENMP
                     #pragma omp parallel for schedule(dynamic) collapse(2) if (multiThread)
 #endif
 
-                    for (int lvl = 0; lvl < levred; lvl++) {
+                    for (int lvl = 0; lvl < levR; lvl++) {
                         for (int dir = 1; dir < 4; dir++) {
                             int Wlvl_L = Ldecomp.level_W(lvl);
                             int Hlvl_L = Ldecomp.level_H(lvl);
@@ -9291,7 +9294,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
 
                     if (aut == 0) {
                         if (levred == 7) {
-                            edge = 2;
+                            edge = 6;
                             vari[0] = 0.8f * SQR((lp.noiself0 / 125.0) * (1.0 + lp.noiself0 / 25.0));
                             vari[1] = 0.8f * SQR((lp.noiself / 125.0) * (1.0 + lp.noiself / 25.0));
                             vari[2] = 0.8f * SQR((lp.noiself2 / 125.0) * (1.0 + lp.noiself2 / 25.0));
@@ -9309,7 +9312,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
 
                         }
                     } else if (aut == 1 || aut == 2) {
-                        edge = 2;
+                        edge = 6;
                         vari[0] = SQR(slidL[0]);
                         vari[1] = SQR(slidL[1]);
                         vari[2] = SQR(slidL[2]);
@@ -9491,7 +9494,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
                     if (aut == 0) {
 
                         if (levred == 7) {
-                            edge = 2;
+                            edge = 6;
                             variC[0] = SQR(noisecfr);
                             variC[1] = SQR(noisecfr);
                             variC[2] = SQR(noisecfr);
@@ -9525,7 +9528,7 @@ void ImProcFunctions::DeNoise(int call, float * slidL, float * slida, float * sl
 
                         }
                     } else if (aut == 1 || aut == 2) {
-                        edge = 2;
+                        edge = 6;
                         variC[0] = SQR(slida[0]);
                         variC[1] = SQR(slida[1]);
                         variC[2] = SQR(slida[2]);

@@ -2936,7 +2936,7 @@ TP_LOCALLAB_VIS_TOOLTIP;<b>Click</b> to show/hide selected Control Spot.\n<b>Ctr
 TP_LOCALLAB_WAMASKCOL;Ψ Mask Wavelet level
 TP_LOCALLAB_WARM;Warm - Cool & Color artifacts
 TP_LOCALLAB_WARM_TOOLTIP;This slider use Ciecam algorithm and acts as White Balance, it can warm or cool the area selected.\nIt can also in some cases reduce color artifacts.
-TP_LOCALLAB_WASDEN_TOOLTIP;Denoise luminance for the 4 first levels (fine).\nThe right limit of the curve correspond to coarse : level 4 and beyond (7)
+TP_LOCALLAB_WASDEN_TOOLTIP;Denoise luminance for the 4 first levels (fine).\nThe right limit of the curve correspond to coarse : level 4 and beyond (6)
 TP_LOCALLAB_WAV;Levels local contrast
 TP_LOCALLAB_WAVBLUR_TOOLTIP;Performs a blur for each level of decomposition, as well as the residual image.
 TP_LOCALLAB_WAVCOMP;Compression by Level
@@ -2945,7 +2945,7 @@ TP_LOCALLAB_WAVCOMPRE_TOOLTIP;Achieve a Tone-mapping or reduction local contrast
 TP_LOCALLAB_WAVCOMP_TOOLTIP;Achive local contrast in function of the direction wavelet decomposition : horizontal, vertical, diagonal
 TP_LOCALLAB_WAVCON;Contrast by Level
 TP_LOCALLAB_WAVCONTF_TOOLTIP;Similar to Contrast By Detail Levels : on abscissa levels.
-TP_LOCALLAB_WAVDEN;Luminance denoise by level (1 2 3 4 .. 7)
+TP_LOCALLAB_WAVDEN;Luminance denoise by level (1 2 3 4 .. 6)
 TP_LOCALLAB_WAVE;Ψ Wavelet
 TP_LOCALLAB_WAVEDG;Local contrast
 TP_LOCALLAB_WAVEEDG_TOOLTIP;Achieves a sharpness taking into account the notion of edges wavelet.\nRequires that at least the first 4 levels are usable
