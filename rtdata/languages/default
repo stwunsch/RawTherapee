@@ -2577,10 +2577,10 @@ TP_LOCALLAB_GRADLOGFRA;Graduated Filter Luminance
 TP_LOCALLAB_GRADSTR;Gradient strength
 TP_LOCALLAB_GRADSTRAB_TOOLTIP;Filter chroma strength
 TP_LOCALLAB_GRADSTRCHRO;Chrominance gradient strength
-TP_LOCALLAB_GRADSTRHUE;Gradient strength Hue
-TP_LOCALLAB_GRADSTRHUE2;Gradient strength Hue
+TP_LOCALLAB_GRADSTRHUE;Hue gradient strength
+TP_LOCALLAB_GRADSTRHUE2;Hue gradient strength
 TP_LOCALLAB_GRADSTRHUE_TOOLTIP;Filter Hue strength
-TP_LOCALLAB_GRADSTRLUM;Luminace gradient strength
+TP_LOCALLAB_GRADSTRLUM;Luminance gradient strength
 TP_LOCALLAB_GRADSTR_TOOLTIP;Filter strength in stops
 TP_LOCALLAB_GRAINFRA;Film Grain   1:1
 TP_LOCALLAB_GRALWFRA;Graduated Filter Local contrast
@@ -2603,7 +2603,7 @@ TP_LOCALLAB_LABEL;Local Adjustments
 TP_LOCALLAB_LABGRID;Color correction grid
 TP_LOCALLAB_LABGRIDMERG;Background
 TP_LOCALLAB_LABGRID_VALUES;High(a)=%1 High(b)=%2\nLow(a)=%3 Low(b)=%4
-TP_LOCALLAB_LABSTRUM;Mask Structure
+TP_LOCALLAB_LABSTRUM;Structure Mask
 TP_LOCALLAB_LAPLACC;ΔØ Mask Laplacian solve PDE
 TP_LOCALLAB_LAPLACE;Laplacian threshold ΔE
 TP_LOCALLAB_LAPLACEXP;Laplacian threshold
