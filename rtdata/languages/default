@@ -2379,8 +2379,8 @@ TP_LOCALLAB_BILATERAL;Bilateral filter
 TP_LOCALLAB_BLACK_EV;Black Ev
 TP_LOCALLAB_BLCO;Chrominance only
 TP_LOCALLAB_BLENDMASKCOL;Blend
-TP_LOCALLAB_BLENDMASKMASK;Add / substract mask Luminance
-TP_LOCALLAB_BLENDMASKMASKAB;Add / substract mask Chrominance
+TP_LOCALLAB_BLENDMASKMASK;Add / substract luminance mask
+TP_LOCALLAB_BLENDMASKMASKAB;Add / substract chrominance mask
 TP_LOCALLAB_BLENDMASK_TOOLTIP;If blend = 0 only shape detection is improved.\nIf blend > 0 the mask is added to the image. If blend < 0 the mask is subtracted from the image
 TP_LOCALLAB_BLENDMASKMASK_TOOLTIP;If this slider = 0 no action.\nAdd or subtract the mask from the original image
 TP_LOCALLAB_BLGUID;Guided Filter
@@ -2492,7 +2492,7 @@ TP_LOCALLAB_DENOI_TOOLTIP;This module can be used alone (at the end of process),
 TP_LOCALLAB_DEPTH;Depth 
 TP_LOCALLAB_DETAIL;Local contrast
 TP_LOCALLAB_DETAILSH;Details
-TP_LOCALLAB_DETAILTHR;Detail threshold Luminance Chroma (DCT ƒ)
+TP_LOCALLAB_DETAILTHR;Luminance & Chroma detail threshold(DCT ƒ)
 TP_LOCALLAB_DUPLSPOTNAME;Copy
 TP_LOCALLAB_EDGFRA;Edge Sharpness
 TP_LOCALLAB_EDGSHOW;Show all tolls
@@ -2723,10 +2723,10 @@ TP_LOCALLAB_MRTHR;Original Image
 TP_LOCALLAB_MRTWO;Short Curves 'L' Mask
 TP_LOCALLAB_MULTIPL_TOOLTIP;Allows the retouching of tones over a very wide range : -18EV +4EV. The first slider acts on very dark tones between -18EV and -6EV. The last slider acts light tones up to 4EV  
 TP_LOCALLAB_NEIGH;Radius
-TP_LOCALLAB_NOISECHROCOARSE;Chroma coarse (Wav)
+TP_LOCALLAB_NOISECHROCOARSE;Coarse chroma(Wav)
 TP_LOCALLAB_NOISECHROC_TOOLTIP;If superior to zero, high quality algorithm is enabled.\nCoarse is for slider >=0.02
 TP_LOCALLAB_NOISECHRODETAIL;Chroma detail recovery (DCT ƒ)
-TP_LOCALLAB_NOISECHROFINE;Chroma fine (Wav)
+TP_LOCALLAB_NOISECHROFINE;Fine chroma(Wav)
 TP_LOCALLAB_NOISEDETAIL_TOOLTIP;Disabled if slider = 100
 TP_LOCALLAB_NOISELEQUAL;Equalizer white-black
 TP_LOCALLAB_NOISELUMCOARSE;Luminance coarse (Wav)
