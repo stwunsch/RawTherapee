@@ -1293,8 +1293,8 @@ HISTORY_MSG_TRANS_Method;Geometry - Method
 HISTORY_MSG_WAVBALCHROM;Equalizer chrominance
 HISTORY_MSG_WAVBALLUM;Equalizer luminance
 HISTORY_MSG_WAVBL;Blur levels
-HISTORY_MSG_WAVCHROMCO;Chroma coarse
-HISTORY_MSG_WAVCHROMFI;Chroma fine
+HISTORY_MSG_WAVCHROMCO;Coarse chroma
+HISTORY_MSG_WAVCHROMFI;Fine chroma
 HISTORY_MSG_WAVCLARI;Clarity
 HISTORY_MSG_WAVDENLH;Level 5
 HISTORY_MSG_WAVDENOISE;Local contrast
@@ -2492,7 +2492,7 @@ TP_LOCALLAB_DENOI_TOOLTIP;This module can be used alone (at the end of process),
 TP_LOCALLAB_DEPTH;Depth 
 TP_LOCALLAB_DETAIL;Local contrast
 TP_LOCALLAB_DETAILSH;Details
-TP_LOCALLAB_DETAILTHR;Luminance & Chroma detail threshold(DCT ƒ)
+TP_LOCALLAB_DETAILTHR;Luminance & Chroma detail threshold (DCT ƒ)
 TP_LOCALLAB_DUPLSPOTNAME;Copy
 TP_LOCALLAB_EDGFRA;Edge Sharpness
 TP_LOCALLAB_EDGSHOW;Show all tolls
@@ -2536,7 +2536,7 @@ TP_LOCALLAB_EXPLAPBAL_TOOLTIP;Balances the action between the original image and
 TP_LOCALLAB_EXPLAPGAMM_TOOLTIP;Apply a gamma before and after Laplace transform
 TP_LOCALLAB_EXPLAPLIN_TOOLTIP;Add linear exposure component before application Laplace transform
 TP_LOCALLAB_EXPLAP_TOOLTIP;The more you act on this threshold slider, the greater the action of reducing contrast.
-TP_LOCALLAB_EXPMERGEFILE_TOOLTIP;Allows various possibilities to blend image (as layers in Photosshop) : difference, multiply, soft light, overlay...with opacity...\nOriginal Image : merge current RT-spot with Original.\nPrevious spot : merge current Rt-spot with previous - if there is only one spot previous = original.\nBackground : merge current RT-spot with a color and luminance background (less possibilties)  
+TP_LOCALLAB_EXPMERGEFILE_TOOLTIP;Allows various possibilities to blend image (as layers in Photoshop (c)) : difference, multiply, soft light, overlay...with opacity...\nOriginal Image : merge current RT-spot with Original.\nPrevious spot : merge current Rt-spot with previous - if there is only one spot previous = original.\nBackground : merge current RT-spot with a color and luminance background (less possibilties)  
 TP_LOCALLAB_EXPMETHOD_TOOLTIP;Standard : use an algorithm similar as main Exposure but in L*a*b* and taking account of deltaE.\n\nContrast attenuator : use another algorithm also with deltaE and with Poisson equation to solve Laplacian in Fourier space.\nContrast attenuator, Dynamic range compression and Standard can be combined.\nFFTW Fourier Transform is optimized in size to reduce processing time.\nReduce artifacts and noise.
 TP_LOCALLAB_EXPNOISEMETHOD_TOOLTIP;Apply a median before Laplace transform to prevent artifacts (noise).\nYou can also use "Denoise" tool.
 TP_LOCALLAB_EXPOSE;Dynamic Range Compr. & Exposure
@@ -2723,10 +2723,10 @@ TP_LOCALLAB_MRTHR;Original Image
 TP_LOCALLAB_MRTWO;Short Curves 'L' Mask
 TP_LOCALLAB_MULTIPL_TOOLTIP;Allows the retouching of tones over a very wide range : -18EV +4EV. The first slider acts on very dark tones between -18EV and -6EV. The last slider acts light tones up to 4EV  
 TP_LOCALLAB_NEIGH;Radius
-TP_LOCALLAB_NOISECHROCOARSE;Coarse chroma(Wav)
+TP_LOCALLAB_NOISECHROCOARSE;Coarse chroma (Wav)
 TP_LOCALLAB_NOISECHROC_TOOLTIP;If superior to zero, high quality algorithm is enabled.\nCoarse is for slider >=0.02
 TP_LOCALLAB_NOISECHRODETAIL;Chroma detail recovery (DCT ƒ)
-TP_LOCALLAB_NOISECHROFINE;Fine chroma(Wav)
+TP_LOCALLAB_NOISECHROFINE;Fine chroma (Wav)
 TP_LOCALLAB_NOISEDETAIL_TOOLTIP;Disabled if slider = 100
 TP_LOCALLAB_NOISELEQUAL;Equalizer white-black
 TP_LOCALLAB_NOISELUMCOARSE;Luminance coarse (Wav)
@@ -3331,8 +3331,8 @@ TP_WAVELET_CHR;Chroma-contrast link strength
 TP_WAVELET_CHRO;Saturated/pastel threshold
 TP_WAVELET_CHROFRAME;Denoise chrominance
 TP_WAVELET_CHROMAFRAME;Chroma
-TP_WAVELET_CHROMCO;Chrominance Coarse
-TP_WAVELET_CHROMFI;Chrominance Fine
+TP_WAVELET_CHROMCO;Coarse chroma
+TP_WAVELET_CHROMFI;Fine Chroma
 TP_WAVELET_CHRO_TOOLTIP;Sets the wavelet level which will be the threshold between saturated and pastel colors.\n1-x: saturated\nx-9: pastel\n\nIf the value exceeds the amount of wavelet levels you are using then it will be ignored.
 TP_WAVELET_CHRWAV;Blur chroma
 TP_WAVELET_CHR_TOOLTIP;Adjusts chroma as a function of "contrast levels" and "chroma-contrast link strength"
