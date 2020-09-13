@@ -1123,12 +1123,12 @@ HISTORY_MSG_879;Local - LC Chroma levels
 HISTORY_MSG_880;Local - LC Chroma blur levels
 HISTORY_MSG_881;Local - Contrast Offset Luminance
 HISTORY_MSG_882;Local - Contrast Blur
-HISTORY_MSG_883;Local - Contrast By Levels
+HISTORY_MSG_883;Local - Contrast By Level
 HISTORY_MSG_884;Local - Contrast Dynamic Range Laplacian
 HISTORY_MSG_885;Local - Contrast Dynamic Range Wavelet
 HISTORY_MSG_886;Local - Contrast Wavelet Curve Compression
 HISTORY_MSG_887;Local - Contrast Wavelet Compression Residual
-HISTORY_MSG_888;Local - Contrast Wavelet Balance Threshold
+HISTORY_MSG_888;Local - Contrast Wavelet Balance threshold
 HISTORY_MSG_889;Local - Contrast Wavelet Graduated Strength
 HISTORY_MSG_890;Local - Contrast Wavelet Graduated angle
 HISTORY_MSG_891;Local - Contrast Wavelet Graduated
@@ -1298,7 +1298,7 @@ HISTORY_MSG_WAVCHROMFI;Fine chroma
 HISTORY_MSG_WAVCLARI;Clarity
 HISTORY_MSG_WAVDENLH;Level 5
 HISTORY_MSG_WAVDENOISE;Local contrast
-HISTORY_MSG_WAVDENOISEH;High levels Local contrast
+HISTORY_MSG_WAVDENOISEH;High level Local contrast
 HISTORY_MSG_WAVDENMET;Local equalizer
 HISTORY_MSG_WAVDETEND;Details soft
 HISTORY_MSG_WAVEDGS;Edge stopping
@@ -2379,8 +2379,8 @@ TP_LOCALLAB_BILATERAL;Bilateral filter
 TP_LOCALLAB_BLACK_EV;Black Ev
 TP_LOCALLAB_BLCO;Chrominance only
 TP_LOCALLAB_BLENDMASKCOL;Blend
-TP_LOCALLAB_BLENDMASKMASK;Add / substract luminance mask
-TP_LOCALLAB_BLENDMASKMASKAB;Add / substract chrominance mask
+TP_LOCALLAB_BLENDMASKMASK;Add / subtract luminance mask
+TP_LOCALLAB_BLENDMASKMASKAB;Add / subtract chrominance mask
 TP_LOCALLAB_BLENDMASK_TOOLTIP;If blend = 0 only shape detection is improved.\nIf blend > 0 the mask is added to the image. If blend < 0 the mask is subtracted from the image
 TP_LOCALLAB_BLENDMASKMASK_TOOLTIP;If this slider = 0 no action.\nAdd or subtract the mask from the original image
 TP_LOCALLAB_BLGUID;Guided Filter
@@ -2430,14 +2430,14 @@ TP_LOCALLAB_CHROMASK_TOOLTIP;You can use this slider to desaturated background (
 TP_LOCALLAB_CHRRT;Chroma
 TP_LOCALLAB_CIRCRADIUS;Spot size
 TP_LOCALLAB_CIRCRAD_TOOLTIP;Contains the references of RT-spot, useful for shape detection (hue, luma, chroma, Sobel).\nLow values may be useful for treating foliage.\nHigh values may be useful for treating skin
-TP_LOCALLAB_CLARICRES;Merge Chroma
+TP_LOCALLAB_CLARICRES;Merge chroma
 TP_LOCALLAB_CLARIFRA;Clarity & Sharp mask - Blend & Soft images 
-TP_LOCALLAB_CLARILRES;Merge Luma
+TP_LOCALLAB_CLARILRES;Merge luma
 TP_LOCALLAB_CLARISOFT;Soft radius
 TP_LOCALLAB_CLARISOFT_TOOLTIP;Enabled for Clarity and Sharp mask if Merge Luma different from zero.\n\nEnabled for all wavelets pyramid modules.\nDisabled if Soft radius = 0
 TP_LOCALLAB_CLARITYML;Clarity
 TP_LOCALLAB_CLARI_TOOLTIP;Under or equal level wavelet 4, 'Sharp mask' is enabled.\nAbove level wavelet 5 'Clarity' is enabled.\nUsefull if you use 'Level dynamic Range Compression'
-TP_LOCALLAB_CLIPTM;Clip Restored datas (gain)
+TP_LOCALLAB_CLIPTM;Clip restored data (gain)
 TP_LOCALLAB_COFR;Color & Light
 TP_LOCALLAB_COLORDE;ΔE preview color - intensity
 //TP_LOCALLAB_COLORDEPREV_TOOLTIP;Button Preview ΔE needs that only one tool is enabled (expander).\nTo be able to have an Preview ΔE with several enable tools use Mask and modifications - Preview ΔE
@@ -2563,7 +2563,8 @@ TP_LOCALLAB_FFTCOL_MASK;FFTW ƒ
 TP_LOCALLAB_FFTW;ƒ - Use Fast Fourier Transform
 TP_LOCALLAB_FFTW2;ƒ - Use Fast Fourier Transform (TIF, JPG,..)
 TP_LOCALLAB_FFTWBLUR;ƒ - Always Use Fast Fourier Transform
-TP_LOCALLAB_FULLIMAGE;Calculate DarkEv - WhiteEv - Value on the entire image
+//TP_LOCALLAB_FULLIMAGE;Calculate DarkEv - WhiteEv - Value on the entire image
+TP_LOCALLAB_FULLIMAGE;Calculate dark-Ev/white-Ev value on the entire image 
 TP_LOCALLAB_GAM;Gamma
 TP_LOCALLAB_GAMFRA;Tone response curve (TRC)
 TP_LOCALLAB_GAMM;Gamma
@@ -2633,7 +2634,7 @@ TP_LOCALLAB_LOCCONT;Unsharp Mask
 TP_LOCALLAB_LOC_CONTRAST;Local contrast & Wavelets
 TP_LOCALLAB_LOC_CONTRASTPYR;Ψ Pyramid 1:
 TP_LOCALLAB_LOC_CONTRASTPYR2;Ψ Pyramid 2:
-TP_LOCALLAB_LOC_CONTRASTPYR2LAB;Contrast by Levels- Tone Mapping - Dir.Contrast
+TP_LOCALLAB_LOC_CONTRASTPYR2LAB;Contrast by Level - Tone Mapping - Dir.Contrast
 TP_LOCALLAB_LOC_CONTRASTPYRLAB;Graduated Filter - Edge Sharpness - Blur
 TP_LOCALLAB_LOC_RESIDPYR;Residual Image (Main)
 TP_LOCALLAB_LOG;Log Encoding
@@ -2711,7 +2712,7 @@ TP_LOCALLAB_MERTHR;Difference
 TP_LOCALLAB_MERTWE;Exclusion
 TP_LOCALLAB_MERTWO;Subtract
 TP_LOCALLAB_METHOD_TOOLTIP;'Enhanced + chroma denoise' significantly increases processing times.\nBut reduce artifacts.
-TP_LOCALLAB_MLABEL;Restored datas Min=%1 Max=%2 (Clip - Offset)
+TP_LOCALLAB_MLABEL;Restored data Min=%1 Max=%2 (Clip - Offset)
 TP_LOCALLAB_MLABEL_TOOLTIP;'Should be' near min=0 max=32768 (log mode) but others values are possible.\nYou can act on Clip Restored datas and Offset to normalize.\n\nRestored image with no mixture.
 TP_LOCALLAB_MODE_EXPERT;Advanced
 TP_LOCALLAB_MODE_NORMAL;Standard
@@ -2750,11 +2751,11 @@ TP_LOCALLAB_PREVIEW;Preview ΔE
 TP_LOCALLAB_PREVHIDE;Hide additional settings
 TP_LOCALLAB_PREVSHOW;Show additional settings
 TP_LOCALLAB_PROXI;ΔE decay
-TP_LOCALLAB_QUALCURV_METHOD;curve type
+TP_LOCALLAB_QUALCURV_METHOD;Curve type
 TP_LOCALLAB_QUAL_METHOD;Global quality
 TP_LOCALLAB_RADIUS;Radius
 TP_LOCALLAB_RADIUS_TOOLTIP;Above Radius 30 Use Fast Fourier Transform
-TP_LOCALLAB_RADMASKCOL;Smooth Radius
+TP_LOCALLAB_RADMASKCOL;Smooth radius
 TP_LOCALLAB_RECT;Rectangle
 TP_LOCALLAB_RECURS;Recursive references
 TP_LOCALLAB_RECURS_TOOLTIP;Recalculate references for hue, luma, chroma after each module and after each RT-spot.\nAlso useful for working with masks.
@@ -2765,7 +2766,7 @@ TP_LOCALLAB_RESETSHOW;Reset All Show Modifications
 TP_LOCALLAB_RESID;Residual Image
 TP_LOCALLAB_RESIDBLUR;Blur Residual Image
 TP_LOCALLAB_RESIDCHRO;Residual image Chroma
-TP_LOCALLAB_RESIDCOMP;Compress Residual image
+TP_LOCALLAB_RESIDCOMP;Compress residual image
 TP_LOCALLAB_RESIDCONT;Residual image Contrast
 TP_LOCALLAB_RESIDHI;Highlights
 TP_LOCALLAB_RESIDHITHR;Highlights threshold
@@ -2812,7 +2813,7 @@ TP_LOCALLAB_SH1;Shadows Highlights
 TP_LOCALLAB_SH2;Equalizer
 TP_LOCALLAB_SHADEX;Shadows
 TP_LOCALLAB_SHADEXCOMP;Shadows compression & tonal width
-TP_LOCALLAB_SHADHIGH;Shadows/Highlights-Tone equalizer
+TP_LOCALLAB_SHADHIGH;Shadows/Highlights & Tone equalizer
 TP_LOCALLAB_SHADOWHIGHLIGHT_TOOLTIP;Adjust shadows & highlights either with shadows & highlights sliders or with a tone equalizer.\nCan be used instead of, or in conjunction with the Exposure module.\nCan also be used as a graduated filter.
 //Can be used instead - or in complement - of exposure module in difficult cases.\nThe use of Denoise may be necessary : lightening the shadows.\n\nCan be used as graduated filter (increase Scope)
 TP_LOCALLAB_SHAMASKCOL;Shadows
@@ -2852,13 +2853,13 @@ TP_LOCALLAB_SHOWPOISSON;Poisson (pde ƒ)
 TP_LOCALLAB_SHOWR;Mask and modifications
 TP_LOCALLAB_SHOWREF;Preview ΔE
 TP_LOCALLAB_SHOWS;Mask and modifications
-TP_LOCALLAB_SHOWSTRUC;Show structure spot(advanced)
-TP_LOCALLAB_SHOWSTRUCEX;Show structure spot(advanced)
+TP_LOCALLAB_SHOWSTRUC;Show spot structure (advanced)
+TP_LOCALLAB_SHOWSTRUCEX;Show spot structure(advanced)
 TP_LOCALLAB_SHOWT;Mask and modifications
 TP_LOCALLAB_SHOWVI;Mask and modifications
 TP_LOCALLAB_SHRESFRA;Shadows/Highlights
 TP_LOCALLAB_SHTRC_TOOLTIP;Modifies the tones of the image by acting on a TRC (Tone Response Curve).\nGamma acts mainly on light tones.\nSlope acts mainly on dark tones
-TP_LOCALLAB_SH_TOOLNAME;Shadows Highlights & Tone Equalizer - 5
+TP_LOCALLAB_SH_TOOLNAME;Shadows/Highlights & Tone Equalizer - 5
 TP_LOCALLAB_SIGMAWAV;Attenuation Response
 TP_LOCALLAB_SIM;Simple
 TP_LOCALLAB_SLOMASKCOL;Slope
@@ -2868,7 +2869,7 @@ TP_LOCALLAB_SOFTM;Soft Light
 //TP_LOCALLAB_SOFTMETHOD_TOOLTIP;Original Retinex is very different from others Retinex method.\nIts acts on grey and balance luminance.\nIt is an emulation of "Dodge" and "Burn"
 TP_LOCALLAB_SOFTMETHOD_TOOLTIP;Apply a Soft-light blend (identical to the global adjustment). Carry out dodge and burn using the original Retinex algorithm.
 TP_LOCALLAB_SOFTRADIUSCOL;Soft radius
-TP_LOCALLAB_SOFTRETI;Reduce artifact ΔE
+TP_LOCALLAB_SOFTRETI;Reduce ΔE artifact
 TP_LOCALLAB_SOFTRETI_TOOLTIP;Take into account deltaE to improve Transmission map
 TP_LOCALLAB_SOFT_TOOLNAME;Soft Light & Original Retinex - 6
 TP_LOCALLAB_SOURCE_GRAY;Value
@@ -2887,7 +2888,7 @@ TP_LOCALLAB_STRGRID;Strength
 TP_LOCALLAB_STRRETI_TOOLTIP;if Strength Retinex < 0.2 only Dehaze is enabled.\nif Strength Retinex >= 0.1 Dehaze is in luminance mode.
 TP_LOCALLAB_STRUC;Structure
 TP_LOCALLAB_STRUCCOL;Structure
-TP_LOCALLAB_STRUCCOL1;Structure spot
+TP_LOCALLAB_STRUCCOL1;Spot structure
 TP_LOCALLAB_STRUCT_TOOLTIP;Use Sobel algorithm to take into account structure in shape detection.\nyou can have a preview by activating "mask and modifications - Show structure spot".\n\nCan be used in conjunction with masks (advanced) structure, blur, wavelet to improve edge detection.\n\nNeeds maskless adjustments to be activated (lightness, exposure...)
 TP_LOCALLAB_STRUMASKCOL;Structure mask strength
 TP_LOCALLAB_STRUMASK_TOOLTIP;Generate a structure mask with difference between surface areas and reliefs.\nIf structure mask as tool is enabled, this mask is used in addition to the other tools (gamma, slope, contrast curve ...)
@@ -2899,8 +2900,8 @@ TP_LOCALLAB_TARGET_GRAY;Target Gray Point
 TP_LOCALLAB_THRES;Threshold structure
 TP_LOCALLAB_THRESDELTAE;ΔE-scope threshold 
 TP_LOCALLAB_THRESRETI;Threshold
-TP_LOCALLAB_THRESWAV;Balance Threshold
-TP_LOCALLAB_TLABEL;TM Datas Min=%1 Max=%2 Mean=%3 Sigma=%4 (Threshold)
+TP_LOCALLAB_THRESWAV;Balance threshold
+TP_LOCALLAB_TLABEL;TM Data Min=%1 Max=%2 Mean=%3 Sigma=%4 (Threshold)
 TP_LOCALLAB_TLABEL2;TM Effective Tm=%1 TM=%2
 TP_LOCALLAB_TLABEL_TOOLTIP;Transmission map result.\nMin and Max are used by Variance.\nTm=Min TM=Max of Transmission Map.\nYou can act on Threshold to normalize
 TP_LOCALLAB_TM;Tone Mapping - Texture
@@ -2949,11 +2950,11 @@ TP_LOCALLAB_WAMASKCOL;Ψ Mask Wavelet level
 TP_LOCALLAB_WARM;Warm - Cool & Color artifacts
 TP_LOCALLAB_WARM_TOOLTIP;This slider use Ciecam algorithm and acts as White Balance, it can warm or cool the area selected.\nIt can also in some cases reduce color artifacts.
 TP_LOCALLAB_WASDEN_TOOLTIP;Denoise luminance for the 4 first levels (fine).\nThe right limit of the curve correspond to coarse : level 4 and beyond (6)
-TP_LOCALLAB_WAV;Levels local contrast
+TP_LOCALLAB_WAV;Level local contrast
 TP_LOCALLAB_WAVBLUR_TOOLTIP;Performs a blur for each level of decomposition, as well as the residual image.
 TP_LOCALLAB_WAVCOMP;Compression by Level
 TP_LOCALLAB_WAVCOMPRE;(un)Compression by Level
-TP_LOCALLAB_WAVCOMPRE_TOOLTIP;Achieve a Tone-mapping or reduction local contrast by levels.\nOn abscissa levels
+TP_LOCALLAB_WAVCOMPRE_TOOLTIP;Achieve a Tone-mapping or reduction local contrast by level.\nOn abscissa levels
 TP_LOCALLAB_WAVCOMP_TOOLTIP;Achive local contrast in function of the direction wavelet decomposition : horizontal, vertical, diagonal
 TP_LOCALLAB_WAVCON;Contrast by Level
 TP_LOCALLAB_WAVCONTF_TOOLTIP;Similar to Contrast By Detail Levels : on abscissa levels.
@@ -3200,7 +3201,7 @@ TP_RETINEX_SLOPE;Free gamma slope
 TP_RETINEX_STRENGTH;Strength
 TP_RETINEX_THRESHOLD;Threshold
 TP_RETINEX_THRESHOLD_TOOLTIP;Limits in/out.\nIn = image source,\nOut = image gauss.
-TP_RETINEX_TLABEL;TM Datas Min=%1 Max=%2 Mean=%3 Sigma=%4
+TP_RETINEX_TLABEL;TM Data Min=%1 Max=%2 Mean=%3 Sigma=%4
 TP_RETINEX_TLABEL2;TM Effective Tm=%1 TM=%2
 TP_RETINEX_TLABEL_TOOLTIP;Transmission map result.\nMin and Max are used by Variance.\nTm=Min TM=Max of Transmission Map.
 TP_RETINEX_TRANF;Transmission
@@ -3276,7 +3277,7 @@ TP_VIBRANCE_CURVEEDITOR_SKINTONES_RANGE3;Red/Yellow
 TP_VIBRANCE_CURVEEDITOR_SKINTONES_RANGE4;Yellow
 TP_VIBRANCE_CURVEEDITOR_SKINTONES_TOOLTIP;Hue according to hue H=f(H)
 TP_VIBRANCE_LABEL;Vibrance
-TP_VIBRANCE_PASTELS;Pastel Tones
+TP_VIBRANCE_PASTELS;Pastel tones
 TP_VIBRANCE_PASTSATTOG;Link pastel and saturated tones
 TP_VIBRANCE_PROTECTSKINS;Protect skin-tones
 TP_VIBRANCE_PSTHRESHOLD;Pastel/saturated tones threshold
@@ -3472,7 +3473,7 @@ TP_WAVELET_MEDI;Reduce artifacts in blue sky
 TP_WAVELET_MEDILEV;Edge detection
 TP_WAVELET_MEDILEV_TOOLTIP;When you enable Edge Detection, it is recommanded:\n- to disabled low contrast levels to avoid artifacts,\n- to use high values of gradient sensitivity.\n\nYou can modulate the strength with 'refine' from Denoise and Refine.
 TP_WAVELET_MERGEC;Merge chroma
-TP_WAVELET_MERGEL;Merge Luma
+TP_WAVELET_MERGEL;Merge luma
 TP_WAVELET_NEUTRAL;Neutral
 TP_WAVELET_MIXCONTRAST;Reference local contrast
 TP_WAVELET_MIXDENOISE;Denoise
