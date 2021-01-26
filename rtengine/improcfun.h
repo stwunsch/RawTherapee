@@ -270,7 +270,7 @@ public:
          const LocCCmaskCurve & locccmasretiCurve, bool lcmasretiutili, const  LocLLmaskCurve & locllmasretiCurve, bool llmasretiutili, const  LocHHmaskCurve & lochhmasretiCurve, bool lhmasretiutili,
          int llretiMask, bool retiMasktmap, bool retiMask, float rad, float lap, bool pde, float gamm, float slop, float chro, float blend,
          const LUTf & lmaskretilocalcurve, bool localmaskretiutili,
-         LabImage * bufreti, LabImage * bufmask, LabImage * buforig, LabImage * buforigmas, bool multiThread,
+         LabImage * bufreti, LabImage * bufmask, LabImage * buforig, LabImage * buforigmas, LabImage * bufmaskorigreti, bool multiThread,
          bool delt, const float hueref, const float chromaref, const float lumaref,
          float maxdE, float mindE, float maxdElim,  float mindElim, float iterat, float limscope, int scope, float balance, float balanceh, float lumask);
 
@@ -279,7 +279,7 @@ public:
     void log_encode(Imagefloat *rgb, struct local_params & lp, bool multiThread, int bfw, int bfh);
     void getAutoLogloc(int sp, ImageSource *imgsrc, float *sourceg, float *blackev, float *whiteev, bool *Autogr, float *sourceab, int fw, int fh, float xsta, float xend, float ysta, float yend, int SCALE);
 
-    void MSRLocal(int call, int sp, bool fftw, int lum, float** reducDE, LabImage * bufreti, LabImage * bufmask, LabImage * buforig, LabImage * buforigmas, float** luminance, const float* const *originalLuminance,
+    void MSRLocal(int call, int sp, bool fftw, int lum, float** reducDE, LabImage * bufreti, LabImage * bufmask, LabImage * buforig, LabImage * buforigmas, LabImage * bufmaskorigreti, float** luminance, const float* const *originalLuminance,
         const int width, const int height, int bfwr, int bfhr, const procparams::LocallabParams &loc, const int skip, const LocretigainCurve &locRETgainCcurve, const LocretitransCurve &locRETtransCcurve,
         const int chrome, const int scall, const float krad, float &minCD, float &maxCD, float &mini, float &maxi, float &Tmean, float &Tsigma, float &Tmin, float &Tmax,
         const LocCCmaskCurve & locccmasretiCurve, bool lcmasretiutili, const  LocLLmaskCurve & locllmasretiCurve, bool llmasretiutili, const  LocHHmaskCurve & lochhmasretiCurve, bool lhmasretiutili, int llretiMask,
@@ -329,6 +329,7 @@ public:
                 const LocwavCurve& locconwavCurve, bool locconwavutili,
                 const LocwavCurve& loccompwavCurve, bool loccompwavutili,
                 const LocwavCurve& loccomprewavCurve, bool loccomprewavutili,
+                const LocwavCurve& locwavCurvehue, bool locwavhueutili,
                 const LocwavCurve& locwavCurveden, bool locwavdenutili,
                 const LocwavCurve& locedgwavCurve, bool locedgwavutili,
                 const LocwavCurve& loclmasCurve_wav, bool lmasutili_wav,
@@ -364,16 +365,18 @@ public:
 
     void transit_shapedetect2(int call, int senstype, const LabImage * bufexporig, const LabImage * bufexpfin, LabImage * originalmask, const float hueref, const float chromaref, const float lumaref, float sobelref, float meansobel, float ** blend2, struct local_params & lp, LabImage * original, LabImage * transformed, int cx, int cy, int sk);
 
-    void transit_shapedetect_retinex(int call, int senstype, LabImage * bufexporig, LabImage * bufmask, LabImage * buforigmas, float **buflight, float **bufchro, const float hueref, const float chromaref,  const float lumaref, const struct local_params & lp, LabImage * original, LabImage * transformed, int cx, int cy, int sk);
+    void transit_shapedetect_retinex(int call, int senstype, LabImage * bufexporig, LabImage * bufexpfin, LabImage * bufmask, LabImage * buforigmas, float **buflight, float **bufchro, const float hueref, const float chromaref,  const float lumaref, struct local_params & lp, LabImage * original, LabImage * transformed, int cx, int cy, int sk);
     void transit_shapedetect(int senstype, const LabImage *bufexporig, LabImage * originalmask, float **bufchro, bool HHutili, const float hueref, const float chromaref, const float lumaref, float sobelref, float meansobel, float ** blend2, const struct local_params & lp, LabImage * original, LabImage * transformed, int cx, int cy, int sk);
-    void exlabLocal(local_params& lp, int bfh, int bfw, int bfhr, int bfwr, LabImage* bufexporig, LabImage* lab, const LUTf& hltonecurve, const LUTf& shtonecurve, const LUTf& tonecurve,  const float hueref, const float lumaref, const float chromaref);
+    void exlabLocal(local_params& lp, float strlap, int bfh, int bfw, int bfhr, int bfwr, LabImage* bufexporig, LabImage* lab, const LUTf& hltonecurve, const LUTf& shtonecurve, const LUTf& tonecurve,  const float hueref, const float lumaref, const float chromaref);
     void Exclude_Local(float **deltaso, float hueref, float chromaref, float lumaref, float sobelref, float meansobel, const struct local_params & lp, const LabImage * original, LabImage * transformed, const LabImage * rsv, const LabImage * reserv, int cx, int cy, int sk);
 
     void DeNoise_Local(int call, const struct local_params& lp, LabImage* originalmask, int levred, float hueref, float lumaref, float chromaref, LabImage* original, LabImage* transformed, const LabImage &tmp1, int cx, int cy, int sk);
-    void DeNoise(int call, int del,  float * slidL, float * slida, float * slidb, int aut, bool noiscfactiv, const struct local_params& lp, LabImage* originalmaskbl, int levred, float huerefblur, float lumarefblur, float chromarefblur, LabImage* original, LabImage* transformed, int cx, int cy, int sk);
+    void DeNoise_Local2(const struct local_params& lp, LabImage* originalmask, int levred, float hueref, float lumaref, float chromaref, LabImage* original, LabImage* transformed, const LabImage &tmp1, int cx, int cy, int sk);
+
+    void DeNoise(int call, float * slidL, float * slida, float * slidb, int aut, bool noiscfactiv, const struct local_params& lp, LabImage* originalmaskbl, LabImage *  bufmaskblurbl, int levred, float huerefblur, float lumarefblur, float chromarefblur, LabImage* original, LabImage* transformed, int cx, int cy, int sk, const LocwavCurve& locwavCurvehue, bool locwavhueutili);
 
 
-    void fftw_denoise(int GW, int GH, int max_numblox_W, int min_numblox_W, float **tmp1, array2D<float> *Lin,  int numThreads, const struct local_params & lp, int chrom);
+    void fftw_denoise(int sk, int GW, int GH, int max_numblox_W, int min_numblox_W, float **tmp1, array2D<float> *Lin,  int numThreads, const struct local_params & lp, int chrom);
 
     void ColorLight_Local(float moddE, float powdE, int call, LabImage * bufcolorig, LabImage * originalmask, float **buflight, float **bufchro, float **bufchroslid, float ** bufhh, float ** buflightslid, bool &LHutili, bool &HHutili, const float hueplus, const float huemoins, const float hueref, const float dhue, const float chromaref, const float lumaref, float sobelref, float ** blend2, LUTf & lllocalcurve, const LocLHCurve & loclhCurve, const LocHHCurve & lochhCurve, LUTf & lightCurveloc, const local_params& lp, LabImage* original, LabImage* transformed, int cx, int cy, int sk);
     void InverseColorLight_Local(bool tonequ, bool tonecurv, int sp, int senstype, struct local_params& lp, LabImage * originalmask, const LUTf& lightCurveloc, const LUTf& hltonecurveloc, const LUTf& shtonecurveloc, const LUTf& tonecurveloc, const LUTf& exlocalcurve, const LUTf& cclocalcurve, float adjustr, bool localcutili, const LUTf& lllocalcurve, bool locallutili, LabImage* original, LabImage* transformed, int cx, int cy, const float hueref, const float chromaref, const float lumaref, int sk);

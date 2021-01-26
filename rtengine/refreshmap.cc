@@ -1007,7 +1007,60 @@ int refreshmap[rtengine::NUMOFEVENTS] = {
     LUMINANCECURVE,   // Evlocallabsursour
     LUMINANCECURVE,   // Evlocallablightq
     LUMINANCECURVE,   // Evlocallabcolorfl
-    LUMINANCECURVE   // Evlocallabrepar
+    LUMINANCECURVE,   // Evlocallabrepar
+    LUMINANCECURVE,   //EvlocallabwavCurvehue
+    LUMINANCECURVE,   // Evlocallablevelthr
+    LUMINANCECURVE,   // Evlocallablevelthrlow
+    LUMINANCECURVE,   //Evlocallabusemask1
+    LUMINANCECURVE,   // Evlocallablnoiselow
+    LUMINANCECURVE,   // Evlocallabrecothres
+    LUMINANCECURVE,   // Evlocallablowthres
+    LUMINANCECURVE,   // Evlocallabhigthres
+    LUMINANCECURVE,   // Evlocallabrecothresd
+    LUMINANCECURVE,   // Evlocallablowthresd
+    LUMINANCECURVE,   // Evlocallabhigthresd
+    LUMINANCECURVE,   // Evlocallabinvmaskd
+    LUMINANCECURVE,   // Evlocallabinvmask
+    LUMINANCECURVE,   // Evlocallabdecayd
+    LUMINANCECURVE,   // Evlocallabrecothresc
+    LUMINANCECURVE,   // Evlocallablowthresc
+    LUMINANCECURVE,   // Evlocallabhigthresc
+    LUMINANCECURVE,   // Evlocallabdecayc
+    LUMINANCECURVE,   // Evlocallabmidthresd
+    LUMINANCECURVE,   // Evlocallabrecothresl
+    LUMINANCECURVE,   // Evlocallablowthresl
+    LUMINANCECURVE,   // Evlocallabhigthresl
+    LUMINANCECURVE,  // Evlocallabdecayl
+    LUMINANCECURVE,   // Evlocallabrecothrese
+    LUMINANCECURVE,   // Evlocallablowthrese
+    LUMINANCECURVE,   // Evlocallabhigthrese
+    LUMINANCECURVE,   // Evlocallabdecaye
+    LUMINANCECURVE,   // Evlocallabrecothress
+    LUMINANCECURVE,   // Evlocallablowthress
+    LUMINANCECURVE,   // Evlocallabhigthress
+    LUMINANCECURVE,   // Evlocallabdecays
+    LUMINANCECURVE,   // Evlocallabrecothrev
+    LUMINANCECURVE,   // Evlocallablowthresv
+    LUMINANCECURVE,   // Evlocallabhigthresv
+    LUMINANCECURVE,   // Evlocallabdecayv
+    LUMINANCECURVE,   // Evlocallabrecothrew
+    LUMINANCECURVE,   // Evlocallablowthresw
+    LUMINANCECURVE,   // Evlocallabhigthresw
+    LUMINANCECURVE,   // Evlocallabdecayw
+    LUMINANCECURVE,   // Evlocallabmidthresdch
+    LUMINANCECURVE,   // Evlocallabrecothret
+    LUMINANCECURVE,   // Evlocallablowthrest
+    LUMINANCECURVE,   // Evlocallabhigthrest
+    LUMINANCECURVE,   // Evlocallabdecayt
+    LUMINANCECURVE,   // Evlocallabrecothrecb
+    LUMINANCECURVE,   // Evlocallablowthrescb
+    LUMINANCECURVE,   // Evlocallabhigthrescb
+    LUMINANCECURVE,   // Evlocallabdecaycb
+    LUMINANCECURVE,   // Evlocallabrecothrer
+    LUMINANCECURVE,   // Evlocallablowthresr
+    LUMINANCECURVE,   // Evlocallabhigthresr
+    LUMINANCECURVE   // Evlocallabdecayr
+
 
 };
 

@@ -267,6 +267,7 @@ struct ColorAppearanceParamsEdited {
     bool curveMode2;
     bool curveMode3;
     bool complexmethod;
+    bool modelmethod;
     bool enabled;
     bool degree;
     bool autodegree;
@@ -491,6 +492,10 @@ public:
         bool Lmaskcurve;
         bool LLmaskcolcurvewav;
         bool csthresholdcol;
+        bool recothresc;
+        bool lowthresc;
+        bool higthresc;
+        bool decayc;
         // Exposure
         bool visiexpose;
         bool expexpose;
@@ -534,6 +539,10 @@ public:
         bool fatdetail;
         bool fatanchor;
         bool fatlevel;
+        bool recothrese;
+        bool lowthrese;
+        bool higthrese;
+        bool decaye;
         // Shadow highlight
         bool visishadhigh;
         bool expshadhigh;
@@ -566,6 +575,10 @@ public:
         bool fatanchorSH;
         bool gamSH;
         bool sloSH;
+        bool recothress;
+        bool lowthress;
+        bool higthress;
+        bool decays;
         // Vibrance
         bool visivibrance;
         bool expvibrance;
@@ -594,6 +607,10 @@ public:
         bool strvibh;
         bool angvib;
         bool Lmaskvibcurve;
+        bool recothresv;
+        bool lowthresv;
+        bool higthresv;
+        bool decayv;
         // Soft Light
         bool visisoft;
         bool expsoft;
@@ -612,6 +629,15 @@ public:
         bool itera;
         bool guidbl;
         bool strbl;
+        bool recothres;
+        bool lowthres;
+        bool higthres;
+        bool recothresd;
+        bool lowthresd;
+        bool midthresd;
+        bool midthresdch;
+        bool higthresd;
+        bool decayd;
         bool isogr;
         bool strengr;
         bool scalegr;
@@ -619,6 +645,12 @@ public:
         bool blMethod;
         bool chroMethod;
         bool quamethod;
+        bool usemask;
+        bool invmaskd;
+        bool invmask;
+        bool levelthr;
+        bool lnoiselow;
+        bool levelthrlow;
         bool blurMethod;
         bool medMethod;
         bool activlum;
@@ -636,6 +668,7 @@ public:
         bool sensiden;
         bool detailthr;
         bool locwavcurveden;
+        bool locwavcurvehue;
         bool showmaskblMethodtyp;
         bool CCmaskblcurve;
         bool LLmaskblcurve;
@@ -682,6 +715,10 @@ public:
         bool slomasktm;
         bool lapmasktm;
         bool Lmasktmcurve;
+        bool recothrest;
+        bool lowthrest;
+        bool higthrest;
+        bool decayt;
         // Retinex
         bool visireti;
         bool expreti;
@@ -720,6 +757,10 @@ public:
         bool cliptm;
         bool fftwreti;
         bool Lmaskreticurve;
+        bool recothresr;
+        bool lowthresr;
+        bool higthresr;
+        bool decayr;
         // Sharpening
         bool visisharp;
         bool expsharp;
@@ -805,6 +846,10 @@ public:
         bool radmasklc;
         bool chromasklc;
         bool Lmasklccurve;
+        bool recothresw;
+        bool lowthresw;
+        bool higthresw;
+        bool decayw;
         // Contrast by detail levels
         bool visicbdl;
         bool expcbdl;
@@ -827,6 +872,10 @@ public:
         bool slomaskcb;
         bool lapmaskcb;
         bool Lmaskcbcurve;
+        bool recothrescb;
+        bool lowthrescb;
+        bool higthrescb;
+        bool decaycb;
         // Log encoding
         bool visilog;
         bool explog;
@@ -865,6 +914,10 @@ public:
         bool radmaskL;
         bool chromaskL;
         bool LmaskcurveL;
+        bool recothresl;
+        bool lowthresl;
+        bool higthresl;
+        bool decayl;
         //mask
         bool visimask;
         bool complexmask;
