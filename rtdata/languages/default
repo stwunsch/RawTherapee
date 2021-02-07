@@ -2940,7 +2940,7 @@ TP_LOCALLAB_NOISECHRODETAIL;Chroma detail recovery (DCT ƒ)
 TP_LOCALLAB_NOISECHROFINE;Fine chroma (Wav)
 TP_LOCALLAB_NOISEDETAIL_TOOLTIP;Disabled if slider = 100
 TP_LOCALLAB_NOISEGAM;Gamma
-TP_LOCALLAB_NOISEGAM_TOOLTIP;Ig gamma =1 Luminance "Lab" is used. If gamma = 3.0 Luminance "linear" is used.
+TP_LOCALLAB_NOISEGAM_TOOLTIP;If gamma = 1 Luminance "Lab" is used. If gamma = 3.0 Luminance "linear" is used.
 TP_LOCALLAB_NOISELEQUAL;Equalizer white-black
 TP_LOCALLAB_NOISELUMCOARSE;Luminance coarse (Wav)
 TP_LOCALLAB_NOISELUMDETAIL;Luminance detail recovery (DCT ƒ)
