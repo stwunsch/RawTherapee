@@ -435,6 +435,7 @@ public:
         bool complexcolor;
         bool curvactiv;
         bool lightness;
+        bool gamc;
         bool contrast;
         bool chroma;
         bool labgridALow;
@@ -509,6 +510,7 @@ public:
         bool shcompr;
         bool expchroma;
         bool sensiex;
+        bool gamex;
         bool structexp;
         bool blurexpde;
         bool strexp;
@@ -825,6 +827,7 @@ public:
         bool edgw;
         bool basew;
         bool sensilc;
+        bool gamlc;
         bool fftwlc;
         bool blurlc;
         bool wavblur;

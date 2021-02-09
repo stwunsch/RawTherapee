@@ -177,6 +177,7 @@ class LocallabColor:
 private:
     // Color & Light specific widgets
     Gtk::Frame* const lumFrame;
+    Adjuster* const gamc;
     Adjuster* const lightness;
     Adjuster* const contrast;
     Adjuster* const chroma;
@@ -341,6 +342,7 @@ private:
     Adjuster* const fatdetail;
     Adjuster* const fatlevel;
     Adjuster* const fatanchor;
+    Adjuster* const gamex;
     Adjuster* const sensiex;
     Adjuster* const structexp;
     Adjuster* const blurexpde;
@@ -1077,6 +1079,7 @@ private:
     Adjuster* const residshathr;
     Adjuster* const residhi;
     Adjuster* const residhithr;
+    Adjuster* const gamlc;
     Adjuster* const sensilc;
     Gtk::Frame* const clariFrame;
     Adjuster* const clarilres;

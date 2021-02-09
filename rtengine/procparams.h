@@ -1027,6 +1027,7 @@ struct LocallabParams {
         int complexcolor;
         bool curvactiv;
         int lightness;
+        double gamc;
         int contrast;
         int chroma;
         double labgridALow;
@@ -1101,6 +1102,7 @@ struct LocallabParams {
         int shcompr;
         int expchroma;
         int sensiex;
+        double gamex;
         int structexp;
         int blurexpde;
         double strexp;
@@ -1417,6 +1419,7 @@ struct LocallabParams {
         double edgw;
         double basew;
         int sensilc;
+        double gamlc;
         bool fftwlc;
         bool blurlc;
         bool wavblur;

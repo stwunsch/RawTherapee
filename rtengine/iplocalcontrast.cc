@@ -45,7 +45,7 @@ void ImProcFunctions::localContrast(LabImage *lab, float **destination, const rt
     const float light = localContrastParams.lightness;
     array2D<float> buf(width, height);
     float sigma = localContrastParams.radius / scale;
-    //printf("wi%i he=%i am=%f da=%f li=%f si=%f\n", width, height, a, dark, light, sigma);
+  //  printf("wi%i he=%i am=%f da=%f li=%f si=%f\n", width, height, a, dark, light, sigma);
     if(!fftwlc) {
 #ifdef _OPENMP
         #pragma omp parallel if(multiThread)

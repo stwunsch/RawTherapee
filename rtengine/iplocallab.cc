@@ -528,6 +528,9 @@ struct local_params {
     float contcolmask;
     float blurSH;
     float ligh;
+    float gamc;
+    float gamex;
+    float gamlc;
     float lowA, lowB, highA, highB;
     float lowBmerg, highBmerg, lowAmerg, highAmerg;
     int shamo, shdamp, shiter, senssha, sensv;
@@ -1209,6 +1212,9 @@ static void calcLocalParams(int sp, int oW, int oH, const LocallabParams& locall
     float local_contresid = (float) locallab.spots.at(sp).contresid;
     int local_contrast = locallab.spots.at(sp).contrast;
     float local_lightness = (float) locallab.spots.at(sp).lightness;
+    float local_gamc = (float) locallab.spots.at(sp).gamc;
+    float local_gamex = (float) locallab.spots.at(sp).gamex;
+    float local_gamlc = (float) locallab.spots.at(sp).gamlc;
     float labgridALowloc = locallab.spots.at(sp).labgridALow;
     float labgridBLowloc = locallab.spots.at(sp).labgridBLow;
     float labgridBHighloc = locallab.spots.at(sp).labgridBHigh;
@@ -1466,6 +1472,9 @@ static void calcLocalParams(int sp, int oW, int oH, const LocallabParams& locall
     lp.contresid = local_contresid;
     lp.cont = local_contrast;
     lp.ligh = local_lightness;
+    lp.gamc = local_gamc;
+    lp.gamex = local_gamex;
+    lp.gamlc = local_gamlc;
     lp.lowA = labgridALowloc;
     lp.lowB = labgridBLowloc;
     lp.highB = labgridBHighloc;
@@ -13543,6 +13552,30 @@ void ImProcFunctions::Lab_Local(
         int bfw = xend - xstart;
         int bfhr = bfh;
         int bfwr = bfw;
+        float gamma = lp.gamlc;
+        rtengine::GammaValues g_a; //gamma parameters
+        double pwr = 1.0 / lp.gamlc;//default 3.0 - gamma Lab
+        double ts = 9.03296;//always the same 'slope' in the extrem shadows - slope Lab
+        rtengine::Color::calcGamma(pwr, ts, g_a); // call to calcGamma with selected gamma and slope
+
+        if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                for (int y = 0; y < bfh; ++y) {
+                    int x = 0;
+#ifdef __SSE2__
+                    for (; x < bfw - 3; x += 4) {
+                        STVFU(original->L[y][x], F2V(32768.f) * igammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
+                        STVFU(transformed->L[y][x], F2V(32768.f) * igammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
+                    }
+#endif
+                    for (;x < bfw; ++x) {
+                        original->L[y][x] = 32768.f * igammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
+                        transformed->L[y][x] = 32768.f * igammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
+                    }
+                }
+        }
 
         if (bfw >= mSPwav && bfh >= mSPwav) {//avoid too small spot for wavelet
             if (lp.ftwlc) {
@@ -13941,6 +13974,24 @@ void ImProcFunctions::Lab_Local(
 
                 transit_shapedetect2(call, 10, bufgb.get(), tmp1.get(), originalmasklc.get(), hueref, chromaref, lumaref, sobelref, 0.f, nullptr, lp, original, transformed, cx, cy, sk);
                 tmp1.reset();
+            }
+            if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                for (int y = 0; y < bfh; ++y) {//apply inverse gamma 3.f and put result in range 32768.f
+                    int x = 0;
+#ifdef __SSE2__
+                    for (; x < bfw - 3; x += 4) {
+                        STVFU(original->L[y][x], F2V(32768.f) * gammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
+                        STVFU(transformed->L[y][x], F2V(32768.f) * gammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
+                    }
+#endif
+                    for (; x < bfw; ++x) {
+                        original->L[y][x] = 32768.f * gammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
+                        transformed->L[y][x] = 32768.f * gammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
+                    }
+                }
             }
 
             if (params->locallab.spots.at(sp).recurs) {
@@ -14743,6 +14794,30 @@ void ImProcFunctions::Lab_Local(
         int bfhr = bfh;
         int bfwr = bfw;
 
+        float gamma = lp.gamex;
+        rtengine::GammaValues g_a; //gamma parameters
+        double pwr = 1.0 / lp.gamex;//default 3.0 - gamma Lab
+        double ts = 9.03296;//always the same 'slope' in the extrem shadows - slope Lab
+        rtengine::Color::calcGamma(pwr, ts, g_a); // call to calcGamma with selected gamma and slope
+
+        if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                for (int y = 0; y < bfh; ++y) {
+                    int x = 0;
+#ifdef __SSE2__
+                    for (; x < bfw - 3; x += 4) {
+                        STVFU(original->L[y][x], F2V(32768.f) * igammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
+                        STVFU(transformed->L[y][x], F2V(32768.f) * igammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
+                    }
+#endif
+                    for (;x < bfw; ++x) {
+                        original->L[y][x] = 32768.f * igammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
+                        transformed->L[y][x] = 32768.f * igammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
+                    }
+                }
+        }
 
         if (bfw >= mSP && bfh >= mSP) {
 
@@ -15084,6 +15159,24 @@ void ImProcFunctions::Lab_Local(
                     float meansob = 0.f;
                     transit_shapedetect2(call, 1, bufexporig.get(), bufexpfin.get(), originalmaskexp.get(), hueref, chromaref, lumaref, sobelref, meansob, blend2, lp, original, transformed, cx, cy, sk);
                 }
+                if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                    for (int y = 0; y < bfh; ++y) {//apply inverse gamma 3.f and put result in range 32768.f
+                        int x = 0;
+#ifdef __SSE2__
+                        for (; x < bfw - 3; x += 4) {
+                            STVFU(original->L[y][x], F2V(32768.f) * gammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
+                            STVFU(transformed->L[y][x], F2V(32768.f) * gammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
+                        }
+#endif
+                        for (; x < bfw; ++x) {
+                            original->L[y][x] = 32768.f * gammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
+                            transformed->L[y][x] = 32768.f * gammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
+                        }
+                    }
+                }
 
                 if (params->locallab.spots.at(sp).recurs) {
                     original->CopyFrom(transformed, multiThread);
@@ -15206,6 +15299,30 @@ void ImProcFunctions::Lab_Local(
         int bfh = yend - ystart;
         int bfw = xend - xstart;
         const bool spez = params->locallab.spots.at(sp).special;
+        float gamma = lp.gamc;
+        rtengine::GammaValues g_a; //gamma parameters
+        double pwr = 1.0 / lp.gamc;//default 3.0 - gamma Lab
+        double ts = 9.03296;//always the same 'slope' in the extrem shadows - slope Lab
+        rtengine::Color::calcGamma(pwr, ts, g_a); // call to calcGamma with selected gamma and slope
+
+        if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                for (int y = 0; y < bfh; ++y) {
+                    int x = 0;
+#ifdef __SSE2__
+                    for (; x < bfw - 3; x += 4) {
+                        STVFU(original->L[y][x], F2V(32768.f) * igammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
+                        STVFU(transformed->L[y][x], F2V(32768.f) * igammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
+                    }
+#endif
+                    for (;x < bfw; ++x) {
+                        original->L[y][x] = 32768.f * igammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
+                        transformed->L[y][x] = 32768.f * igammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
+                    }
+                }
+        }
 
         if (bfw >= mSP && bfh >= mSP) {
 
@@ -16238,6 +16355,24 @@ void ImProcFunctions::Lab_Local(
                     }
                         float meansob = 0.f;
                         transit_shapedetect2(call, 0, bufcolorig.get(), bufcolfin.get(), originalmaskcol.get(), hueref, chromaref, lumaref, sobelref, meansob, blend2, lp, original, transformed, cx, cy, sk);
+                    }
+                    if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                        for (int y = 0; y < bfh; ++y) {//apply inverse gamma 3.f and put result in range 32768.f
+                            int x = 0;
+#ifdef __SSE2__
+                            for (; x < bfw - 3; x += 4) {
+                            STVFU(original->L[y][x], F2V(32768.f) * gammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
+                            STVFU(transformed->L[y][x], F2V(32768.f) * gammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
+                            }
+#endif
+                            for (; x < bfw; ++x) {
+                                original->L[y][x] = 32768.f * gammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
+                                transformed->L[y][x] = 32768.f * gammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
+                            }
+                        }
                     }
 
                 }

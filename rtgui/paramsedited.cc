@@ -1095,6 +1095,7 @@ void ParamsEdited::initFrom(const std::vector<rtengine::procparams::ProcParams>&
                 locallab.spots.at(j).complexcolor = locallab.spots.at(j).complexcolor && pSpot.complexcolor == otherSpot.complexcolor;
                 locallab.spots.at(j).curvactiv = locallab.spots.at(j).curvactiv && pSpot.curvactiv == otherSpot.curvactiv;
                 locallab.spots.at(j).lightness = locallab.spots.at(j).lightness && pSpot.lightness == otherSpot.lightness;
+                locallab.spots.at(j).gamc = locallab.spots.at(j).gamc && pSpot.gamc == otherSpot.gamc;
                 locallab.spots.at(j).contrast = locallab.spots.at(j).contrast && pSpot.contrast == otherSpot.contrast;
                 locallab.spots.at(j).chroma = locallab.spots.at(j).chroma && pSpot.chroma == otherSpot.chroma;
                 locallab.spots.at(j).labgridALow = locallab.spots.at(j).labgridALow && pSpot.labgridALow == otherSpot.labgridALow;
@@ -1169,6 +1170,7 @@ void ParamsEdited::initFrom(const std::vector<rtengine::procparams::ProcParams>&
                 locallab.spots.at(j).shcompr = locallab.spots.at(j).shcompr && pSpot.shcompr == otherSpot.shcompr;
                 locallab.spots.at(j).expchroma = locallab.spots.at(j).expchroma && pSpot.expchroma == otherSpot.expchroma;
                 locallab.spots.at(j).sensiex = locallab.spots.at(j).sensiex && pSpot.sensiex == otherSpot.sensiex;
+                locallab.spots.at(j).gamex = locallab.spots.at(j).gamex && pSpot.gamex == otherSpot.gamex;
                 locallab.spots.at(j).structexp = locallab.spots.at(j).structexp && pSpot.structexp == otherSpot.structexp;
                 locallab.spots.at(j).blurexpde = locallab.spots.at(j).blurexpde && pSpot.blurexpde == otherSpot.blurexpde;
                 locallab.spots.at(j).strexp = locallab.spots.at(j).strexp && pSpot.strexp == otherSpot.strexp;
@@ -1489,6 +1491,7 @@ void ParamsEdited::initFrom(const std::vector<rtengine::procparams::ProcParams>&
                 locallab.spots.at(j).edgw = locallab.spots.at(j).edgw && pSpot.edgw == otherSpot.edgw;
                 locallab.spots.at(j).basew = locallab.spots.at(j).basew && pSpot.basew == otherSpot.basew;
                 locallab.spots.at(j).sensilc = locallab.spots.at(j).sensilc && pSpot.sensilc == otherSpot.sensilc;
+                locallab.spots.at(j).gamlc = locallab.spots.at(j).gamlc && pSpot.gamlc == otherSpot.gamlc;
                 locallab.spots.at(j).fftwlc = locallab.spots.at(j).fftwlc && pSpot.fftwlc == otherSpot.fftwlc;
                 locallab.spots.at(j).blurlc = locallab.spots.at(j).blurlc && pSpot.blurlc == otherSpot.blurlc;
                 locallab.spots.at(j).wavblur = locallab.spots.at(j).wavblur && pSpot.wavblur == otherSpot.wavblur;
@@ -3380,6 +3383,10 @@ void ParamsEdited::combine(rtengine::procparams::ProcParams& toEdit, const rteng
             toEdit.locallab.spots.at(i).lightness = mods.locallab.spots.at(i).lightness;
         }
 
+        if (locallab.spots.at(i).gamc) {
+            toEdit.locallab.spots.at(i).gamc = mods.locallab.spots.at(i).gamc;
+        }
+
         if (locallab.spots.at(i).contrast) {
             toEdit.locallab.spots.at(i).contrast = mods.locallab.spots.at(i).contrast;
         }
@@ -3671,6 +3678,10 @@ void ParamsEdited::combine(rtengine::procparams::ProcParams& toEdit, const rteng
 
         if (locallab.spots.at(i).sensiex) {
             toEdit.locallab.spots.at(i).sensiex = mods.locallab.spots.at(i).sensiex;
+        }
+
+        if (locallab.spots.at(i).gamex) {
+            toEdit.locallab.spots.at(i).gamex = mods.locallab.spots.at(i).gamex;
         }
 
         if (locallab.spots.at(i).structexp) {
@@ -4915,6 +4926,10 @@ void ParamsEdited::combine(rtengine::procparams::ProcParams& toEdit, const rteng
 
         if (locallab.spots.at(i).sensilc) {
             toEdit.locallab.spots.at(i).sensilc   = mods.locallab.spots.at(i).sensilc;
+        }
+
+        if (locallab.spots.at(i).gamlc) {
+            toEdit.locallab.spots.at(i).gamlc   = mods.locallab.spots.at(i).gamlc;
         }
 
         if (locallab.spots.at(i).fftwlc) {
@@ -6672,6 +6687,7 @@ LocallabParamsEdited::LocallabSpotEdited::LocallabSpotEdited(bool v) :
     complexcolor(v),
     curvactiv(v),
     lightness(v),
+    gamc(v),
     contrast(v),
     chroma(v),
     labgridALow(v),
@@ -6746,6 +6762,7 @@ LocallabParamsEdited::LocallabSpotEdited::LocallabSpotEdited(bool v) :
     shcompr(v),
     expchroma(v),
     sensiex(v),
+    gamex(v),
     structexp(v),
     blurexpde(v),
     strexp(v),
@@ -7062,6 +7079,7 @@ LocallabParamsEdited::LocallabSpotEdited::LocallabSpotEdited(bool v) :
     edgw(v),
     basew(v),
     sensilc(v),
+    gamlc(v),
     fftwlc(v),
     blurlc(v),
     wavblur(v),
@@ -7240,6 +7258,7 @@ void LocallabParamsEdited::LocallabSpotEdited::set(bool v)
     complexcolor = v;
     curvactiv = v;
     lightness = v;
+    gamc = v;
     contrast = v;
     chroma = v;
     labgridALow = v;
@@ -7314,6 +7333,7 @@ void LocallabParamsEdited::LocallabSpotEdited::set(bool v)
     shcompr = v;
     expchroma = v;
     sensiex = v;
+    gamex = v;
     structexp = v;
     blurexpde = v;
     strexp = v;
@@ -7633,6 +7653,7 @@ void LocallabParamsEdited::LocallabSpotEdited::set(bool v)
     edgw = v;
     basew = v;
     sensilc = v;
+    gamlc = v;
     fftwlc = v;
     blurlc = v;
     wavblur = v;

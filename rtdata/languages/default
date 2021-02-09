@@ -2693,6 +2693,8 @@ TP_LOCALLAB_FFTWBLUR;ƒ - Always Use Fast Fourier Transform
 TP_LOCALLAB_FULLIMAGE;Dark-Ev & white-Ev for the whole image 
 TP_LOCALLAB_FULLIMAGELOG_TOOLTIP;Calculates the Ev levels for the whole image.
 TP_LOCALLAB_GAM;Gamma
+TP_LOCALLAB_GAMC;Gamma
+TP_LOCALLAB_GAMC_TOOLTIP;Apply a gamma on Luminance L*a*b* datas before and after treatment
 TP_LOCALLAB_GAMFRA;Tone response curve (TRC)
 TP_LOCALLAB_GAMM;Gamma
 TP_LOCALLAB_GAMMASKCOL;Gamma
@@ -2940,7 +2942,7 @@ TP_LOCALLAB_NOISECHRODETAIL;Chroma detail recovery (DCT ƒ)
 TP_LOCALLAB_NOISECHROFINE;Fine chroma (Wav)
 TP_LOCALLAB_NOISEDETAIL_TOOLTIP;Disabled if slider = 100
 TP_LOCALLAB_NOISEGAM;Gamma
-TP_LOCALLAB_NOISEGAM_TOOLTIP;If gamma = 1 Luminance "Lab" is used. If gamma = 3.0 Luminance "linear" is used.
+TP_LOCALLAB_NOISEGAM_TOOLTIP;If gamma = 1 Luminance "Lab" is used. If gamma = 3.0 Luminance "linear" is used.\nLower values preserve details and texture, higher values increase denoise.
 TP_LOCALLAB_NOISELEQUAL;Equalizer white-black
 TP_LOCALLAB_NOISELUMCOARSE;Luminance coarse (Wav)
 TP_LOCALLAB_NOISELUMDETAIL;Luminance detail recovery (DCT ƒ)

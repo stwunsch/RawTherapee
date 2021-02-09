@@ -413,6 +413,7 @@ LocallabColor::LocallabColor():
 
     // Color & Light specific widgets
     lumFrame(Gtk::manage(new Gtk::Frame(M("TP_LOCALLAB_LUMFRA")))),
+    gamc(Gtk::manage(new Adjuster(M("TP_LOCALLAB_GAMC"), 0.7, 1.3, 0.05, 1.))),
     lightness(Gtk::manage(new Adjuster(M("TP_LOCALLAB_LIGHTNESS"), -100, 500, 1, 0))),
     contrast(Gtk::manage(new Adjuster(M("TP_LOCALLAB_CONTRAST"), -100, 100, 1, 0))),
     chroma(Gtk::manage(new Adjuster(M("TP_LOCALLAB_CHROMA"), -100, 150, 1, 0))),
@@ -515,6 +516,7 @@ LocallabColor::LocallabColor():
     lumFrame->set_label_align(0.025, 0.5);
 
     lightness->setAdjusterListener(this);
+    gamc->setAdjusterListener(this);
 
     contrast->setAdjusterListener(this);
 
@@ -779,6 +781,7 @@ LocallabColor::LocallabColor():
 
     // Add Color & Light specific widgets to GUI
     ToolParamBlock* const lumBox = Gtk::manage(new ToolParamBlock());
+    lumBox->pack_start(*gamc);
     lumBox->pack_start(*lightness);
     lumBox->pack_start(*contrast);
     lumBox->pack_start(*chroma);
@@ -943,6 +946,7 @@ void LocallabColor::updateAdviceTooltips(const bool showTooltips)
 {
     if (showTooltips) {
         lumFrame->set_tooltip_text(M("TP_LOCALLAB_EXPCOLOR_TOOLTIP"));
+        gamc->set_tooltip_text(M("TP_LOCALLAB_GAMC_TOOLTIP"));
         lightness->set_tooltip_text(M("TP_LOCALLAB_LIGHTN_TOOLTIP"));
         gridMethod->set_tooltip_text(M("TP_LOCALLAB_GRIDMETH_TOOLTIP"));
         strengthgrid->set_tooltip_text(M("TP_LOCALLAB_STRENGRID_TOOLTIP"));
@@ -995,6 +999,7 @@ void LocallabColor::updateAdviceTooltips(const bool showTooltips)
     } else {
         lumFrame->set_tooltip_text("");
         lightness->set_tooltip_text("");
+        gamc->set_tooltip_text("");
         gridMethod->set_tooltip_text("");
         strengthgrid->set_tooltip_text("");
         blurcolde->set_tooltip_text("");
@@ -1111,6 +1116,7 @@ void LocallabColor::read(const rtengine::procparams::ProcParams* pp, const Param
         complexity->set_active(spot.complexcolor);
 
         lightness->setValue(spot.lightness);
+        gamc->setValue(spot.gamc);
         contrast->setValue(spot.contrast);
         chroma->setValue(spot.chroma);
         curvactiv->set_active(spot.curvactiv);
@@ -1285,6 +1291,7 @@ void LocallabColor::write(rtengine::procparams::ProcParams* pp, ParamsEdited* pe
         spot.complexcolor = complexity->get_active_row_number();
 
         spot.lightness = lightness->getIntValue();
+        spot.gamc = gamc->getValue();
         spot.contrast = contrast->getIntValue();
         spot.chroma = chroma->getIntValue();
         spot.curvactiv = curvactiv->get_active();
@@ -1448,6 +1455,7 @@ void LocallabColor::setDefaults(const rtengine::procparams::ProcParams* defParam
 
         // Set default value for adjuster, labgrid and threshold adjuster widgets
         lightness->setDefault((double)defSpot.lightness);
+        gamc->setDefault((double)defSpot.gamc);
         contrast->setDefault((double)defSpot.contrast);
         chroma->setDefault((double)defSpot.chroma);
         labgrid->setDefault(defSpot.labgridALow / LocallabParams::LABGRIDL_CORR_MAX,
@@ -1499,6 +1507,13 @@ void LocallabColor::adjusterChanged(Adjuster* a, double newval)
             if (listener) {
                 listener->panelChanged(Evlocallablightness,
                                        lightness->getTextValue() + " (" + escapeHtmlChars(spotName) + ")");
+            }
+        }
+
+        if (a == gamc) {
+            if (listener) {
+                listener->panelChanged(Evlocallabgamc,
+                                       gamc->getTextValue() + " (" + escapeHtmlChars(spotName) + ")");
             }
         }
 
@@ -2484,6 +2499,7 @@ LocallabExposure::LocallabExposure():
     fatdetail(Gtk::manage(new Adjuster(M("TP_LOCALLAB_FATDETAIL"), -100., 300., 1., 0.))),
     fatlevel(Gtk::manage(new Adjuster(M("TP_LOCALLAB_FATLEVEL"), 0.25, 2.5, 0.05, 1.))),
     fatanchor(Gtk::manage(new Adjuster(M("TP_LOCALLAB_FATANCHORA"), 0.1, 3.0, 0.05, 1.))),
+    gamex(Gtk::manage(new Adjuster(M("TP_LOCALLAB_GAMC"), 0.7, 1.3, 0.05, 1.))),
     sensiex(Gtk::manage(new Adjuster(M("TP_LOCALLAB_SENSI"), 0, 100, 1, 60))),
     structexp(Gtk::manage(new Adjuster(M("TP_LOCALLAB_STRUCCOL"), 0, 100, 1, 0))),
     blurexpde(Gtk::manage(new Adjuster(M("TP_LOCALLAB_BLURDE"), 2, 100, 1, 5))),
@@ -2567,6 +2583,8 @@ LocallabExposure::LocallabExposure():
     fatanchor->setAdjusterListener(this);
 
     sensiex->setAdjusterListener(this);
+
+    gamex->setAdjusterListener(this);
 
     structexp->setAdjusterListener(this);
 
@@ -2705,6 +2723,7 @@ LocallabExposure::LocallabExposure():
     expfat->add(*fatBox, false);
 //    pack_start(*fatFrame);
     pack_start(*expfat);
+    pack_start(*gamex);
     pack_start(*expcomp);
     pack_start(*sensiex);
     pack_start(*structexp);
@@ -2809,6 +2828,7 @@ void LocallabExposure::updateAdviceTooltips(const bool showTooltips)
 //        fatFrame->set_tooltip_text(M("TP_LOCALLAB_FATFRAME_TOOLTIP"));
         expfat->set_tooltip_text(M("TP_LOCALLAB_FATFRAME_TOOLTIP"));
         expcomp->set_tooltip_text(M("TP_LOCALLAB_EXPCOMP_TOOLTIP"));
+        gamex->set_tooltip_text(M("TP_LOCALLAB_GAMC_TOOLTIP"));
         sensiex->set_tooltip_text(M("TP_LOCALLAB_SENSI_TOOLTIP"));
         structexp->set_tooltip_text(M("TP_LOCALLAB_STRUCT_TOOLTIP"));
         expchroma->set_tooltip_text(M("TP_LOCALLAB_EXPCHROMA_TOOLTIP"));
@@ -2843,6 +2863,7 @@ void LocallabExposure::updateAdviceTooltips(const bool showTooltips)
         expfat->set_tooltip_text("");
         expcomp->set_tooltip_text("");
         sensiex->set_tooltip_text("");
+        gamex->set_tooltip_text("");
         structexp->set_tooltip_text("");
         expchroma->set_tooltip_text("");
         shapeexpos->setTooltip("");
@@ -2945,6 +2966,7 @@ void LocallabExposure::read(const rtengine::procparams::ProcParams* pp, const Pa
         fatlevel->setValue(spot.fatlevel);
         fatanchor->setValue(spot.fatanchor);
         sensiex->setValue(spot.sensiex);
+        gamex->setValue(spot.gamex);
         structexp->setValue(spot.structexp);
         blurexpde->setValue(spot.blurexpde);
         expcomp->setValue(spot.expcomp);
@@ -3032,6 +3054,7 @@ void LocallabExposure::write(rtengine::procparams::ProcParams* pp, ParamsEdited*
         spot.fatlevel = fatlevel->getValue();
         spot.fatanchor = fatanchor->getValue();
         spot.sensiex = sensiex->getIntValue();
+        spot.gamex = gamex->getValue();
         spot.structexp = structexp->getIntValue();
         spot.blurexpde = blurexpde->getIntValue();
         spot.expcomp = expcomp->getValue();
@@ -3082,6 +3105,7 @@ void LocallabExposure::setDefaults(const rtengine::procparams::ProcParams* defPa
         fatlevel->setDefault(defSpot.fatlevel);
         fatanchor->setDefault(defSpot.fatanchor);
         sensiex->setDefault((double)defSpot.sensiex);
+        gamex->setDefault((double)defSpot.gamex);
         structexp->setDefault((double)defSpot.structexp);
         blurexpde->setDefault((double)defSpot.blurexpde);
         expcomp->setDefault(defSpot.expcomp);
@@ -3207,6 +3231,13 @@ void LocallabExposure::adjusterChanged(Adjuster* a, double newval)
             if (listener) {
                 listener->panelChanged(Evlocallabsensiex,
                                        sensiex->getTextValue() + " (" + escapeHtmlChars(spotName) + ")");
+            }
+        }
+
+        if (a == gamex) {
+            if (listener) {
+                listener->panelChanged(Evlocallabgamex,
+                                       gamex->getTextValue() + " (" + escapeHtmlChars(spotName) + ")");
             }
         }
 
@@ -6242,7 +6273,7 @@ LocallabBlur::LocallabBlur():
     noiselumc(Gtk::manage(new Adjuster(M("TP_LOCALLAB_NOISELUMCOARSE"), MINCHRO, MAXCHROCC, 0.01, 0.))),
     noiselumdetail(Gtk::manage(new Adjuster(M("TP_LOCALLAB_NOISELUMDETAIL"), 0., 100., 0.01, 50.))),
     noiselequal(Gtk::manage(new Adjuster(M("TP_LOCALLAB_NOISELEQUAL"), -2, 10, 1, 7, Gtk::manage(new RTImage("circle-white-small.png")), Gtk::manage(new RTImage("circle-black-small.png"))))),
-    noisegam(Gtk::manage(new Adjuster(M("TP_LOCALLAB_NOISEGAM"), 1., 5., 0.1, 1.))),
+    noisegam(Gtk::manage(new Adjuster(M("TP_LOCALLAB_NOISEGAM"), 1.0, 5., 0.1, 1.))),
     LocalcurveEditorwavhue(new CurveEditorGroup(options.lastlocalCurvesDir, M("TP_WAVELET_DENOISEHUE"))),
     wavhue(static_cast<FlatCurveEditor*>(LocalcurveEditorwavhue->addCurve(CT_Flat, "", nullptr, false, true))),
     noisechrof(Gtk::manage(new Adjuster(M("TP_LOCALLAB_NOISECHROFINE"), MINCHRO, MAXCHRO, 0.01, 0.))),
