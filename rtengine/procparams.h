@@ -1150,6 +1150,7 @@ struct LocallabParams {
         int s_tonalwidth;
         int sh_radius;
         int sensihs;
+        double gamhs;
         bool enaSHMask;
         std::vector<double> CCmaskSHcurve;
         std::vector<double> LLmaskSHcurve;

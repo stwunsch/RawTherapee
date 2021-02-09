@@ -1984,6 +1984,7 @@ void LocallabColor::convertParamToSimple()
     softradiuscol->setValue(defSpot.softradiuscol);
     strcol->setValue(defSpot.strcol);
     angcol->setValue(defSpot.angcol);
+    gamc->setValue(defSpot.gamc);
 
     if (defSpot.qualitycurveMethod == "none") {
         qualitycurveMethod->set_active(0);
@@ -2028,6 +2029,7 @@ void LocallabColor::updateGUIToMode(const modeType new_type)
             maskusablec->hide();
             maskunusablec->hide();
             decayc->hide();
+            gamc->hide();
             break;
 
         case Normal:
@@ -2067,6 +2069,7 @@ void LocallabColor::updateGUIToMode(const modeType new_type)
             if (!invers->get_active()) { // Keep widget hidden when invers is toggled
                 expgradcol->show();
                 exprecov->show();
+                gamc->show();
             }
 
             expcurvcol->show();
@@ -2084,6 +2087,7 @@ void LocallabColor::updateGUIToMode(const modeType new_type)
                 softradiuscol->show();
                 expgradcol->show();
                 exprecov->show();
+                gamc->show();
             }
 
             strcolab->show();
@@ -2376,8 +2380,11 @@ void LocallabColor::updateColorGUI1()
         showmaskcolMethodinv->show();
         contcol->hide();
         blurcol->hide();
+        gamc->hide();
+
     } else {
         gridFrame->show();
+        gamc->show();
 
         if (mode == Expert) { // Keep widget hidden in Normal and Simple mode
             structcol->show();
@@ -3469,6 +3476,8 @@ void LocallabExposure::convertParamToSimple()
     // Set hidden specific GUI widgets in Simple mode to default spot values
     strexp->setValue(defSpot.strexp);
     angexp->setValue(defSpot.angexp);
+    gamex->setValue(defSpot.gamex);
+    
     softradiusexp->setValue(defSpot.softradiusexp);
     enaExpMask->set_active(defSpot.enaExpMask);
     enaExpMaskaft->set_active(defSpot.enaExpMaskaft);
@@ -3502,6 +3511,7 @@ void LocallabExposure::updateGUIToMode(const modeType new_type)
             maskunusablee->hide();
             decaye->hide();
             expmaskexp->hide();
+            gamex->hide();
 
             break;
 
@@ -3528,6 +3538,7 @@ void LocallabExposure::updateGUIToMode(const modeType new_type)
                 expgradexp->show();
                 softradiusexp->show();
                 exprecove->show();
+                gamex->show();
             }
 
             expmaskexp->show();
@@ -3547,6 +3558,8 @@ void LocallabExposure::updateGUIToMode(const modeType new_type)
                 expgradexp->show();
                 softradiusexp->show();
                 exprecove->show();
+                gamex->show();
+
             }
             if (enaExpMask->get_active()) {
                 maskusablee->show();
@@ -3745,6 +3758,7 @@ void LocallabExposure::updateExposureGUI3()
         expMethod->hide();
         expcomp->setLabel(M("TP_LOCALLAB_EXPCOMPINV"));
         exprecove->hide();
+        gamex->hide();
 
         // Manage specific case where expMethod is different from 0
         if (expMethod->get_active_row_number() > 0) {
@@ -3767,6 +3781,7 @@ void LocallabExposure::updateExposureGUI3()
     } else {
         expMethod->show();
         expcomp->setLabel(M("TP_LOCALLAB_EXPCOMP"));
+        gamex->show();
 
         if (mode == Expert || mode == Normal) { // Keep widgets hidden in Simple mode
             softradiusexp->show();
@@ -3815,6 +3830,7 @@ LocallabShadow::LocallabShadow():
     s_tonalwidth(Gtk::manage(new Adjuster(M("TP_SHADOWSHLIGHTS_SHTONALW"), 10, 100, 1, 30))),
     sh_radius(Gtk::manage(new Adjuster(M("TP_SHADOWSHLIGHTS_RADIUS"), 0, 100, 1, 40))),
     sensihs(Gtk::manage(new Adjuster(M("TP_LOCALLAB_SENSI"), 0, 100, 1, 15))),
+    gamhs(Gtk::manage(new Adjuster(M("TP_LOCALLAB_GAMC"), 0.7, 1.3, 0.05, 1.))),
     blurSHde(Gtk::manage(new Adjuster(M("TP_LOCALLAB_BLURDE"), 2, 100, 1, 5))),
     exprecovs(Gtk::manage(new MyExpander(false, M("TP_LOCALLAB_DENOI2_EXP")))),
     maskusables(Gtk::manage(new Gtk::Label(M("TP_LOCALLAB_MASKUSABLE")))),
@@ -3882,6 +3898,7 @@ LocallabShadow::LocallabShadow():
     setExpandAlignProperties(exprecovs, true, false, Gtk::ALIGN_FILL, Gtk::ALIGN_START);
 
     sensihs->setAdjusterListener(this);
+    gamhs->setAdjusterListener(this);
 
     blurSHde->setAdjusterListener(this);
 
@@ -3975,6 +3992,7 @@ LocallabShadow::LocallabShadow():
     pack_start(*shadows);
     pack_start(*s_tonalwidth);
     pack_start(*sh_radius);
+    pack_start(*gamhs);
     // pack_start(*sensihs);
     pack_start(*blurSHde);
     ToolParamBlock* const shBox3 = Gtk::manage(new ToolParamBlock());
@@ -4195,6 +4213,7 @@ void LocallabShadow::read(const rtengine::procparams::ProcParams* pp, const Para
         s_tonalwidth->setValue((double)spot.s_tonalwidth);
         sh_radius->setValue((double)spot.sh_radius);
         sensihs->setValue((double)spot.sensihs);
+        gamhs->setValue((double)spot.gamhs);
         blurSHde->setValue((double)spot.blurSHde);
         gamSH->setValue(spot.gamSH);
         sloSH->setValue(spot.sloSH);
@@ -4259,6 +4278,7 @@ void LocallabShadow::write(rtengine::procparams::ProcParams* pp, ParamsEdited* p
         spot.s_tonalwidth = s_tonalwidth->getIntValue();
         spot.sh_radius = sh_radius->getIntValue();
         spot.sensihs = sensihs->getIntValue();
+        spot.gamhs = gamhs->getValue();
         spot.blurSHde = blurSHde->getIntValue();
         spot.gamSH = gamSH->getValue();
         spot.sloSH = sloSH->getValue();
@@ -4306,6 +4326,7 @@ void LocallabShadow::setDefaults(const rtengine::procparams::ProcParams* defPara
         s_tonalwidth->setDefault((double)defSpot.s_tonalwidth);
         sh_radius->setDefault((double)defSpot.sh_radius);
         sensihs->setDefault((double)defSpot.sensihs);
+        gamhs->setDefault((double)defSpot.gamhs);
         blurSHde->setDefault((double)defSpot.blurSHde);
         gamSH->setDefault(defSpot.gamSH);
         sloSH->setDefault(defSpot.sloSH);
@@ -4419,6 +4440,13 @@ void LocallabShadow::adjusterChanged(Adjuster* a, double newval)
             if (listener) {
                 listener->panelChanged(Evlocallabsensihs,
                                        sensihs->getTextValue() + " (" + escapeHtmlChars(spotName) + ")");
+            }
+        }
+
+        if (a == gamhs) {
+            if (listener) {
+                listener->panelChanged(Evlocallabgamhs,
+                                       gamhs->getTextValue() + " (" + escapeHtmlChars(spotName) + ")");
             }
         }
 
@@ -4593,6 +4621,8 @@ void LocallabShadow::convertParamToSimple()
 
     // Set hidden specific GUI widgets in Simple mode to default spot values
     gamSH->setValue(defSpot.gamSH);
+    gamhs->setValue(defSpot.gamhs);
+    
     sloSH->setValue(defSpot.sloSH);
     strSH->setValue(defSpot.strSH);
     angSH->setValue(defSpot.angSH);
@@ -4629,6 +4659,7 @@ void LocallabShadow::updateGUIToMode(const modeType new_type)
             maskusables->hide();
             maskunusables->hide();
             decays->hide();
+            gamhs->hide();
 
             break;
 
@@ -4658,6 +4689,8 @@ void LocallabShadow::updateGUIToMode(const modeType new_type)
             if (!inverssh->get_active()) { // Keep widget hidden when inverssh is toggled
                 expgradsh->show();
                 exprecovs->show();
+                gamhs->show();
+
             }
 
             expmasksh->show();
@@ -4676,6 +4709,8 @@ void LocallabShadow::updateGUIToMode(const modeType new_type)
             if (!inverssh->get_active()) { // Keep widget hidden when inverssh is toggled
                 expgradsh->show();
                 exprecovs->show();
+                gamhs->show();
+
             }
             if (enaSHMask->get_active()) {
                 maskusables->show();
@@ -4826,11 +4861,14 @@ void LocallabShadow::updateShadowGUI1()
         showmaskSHMethodConn.block(false);
         showmaskSHMethodinv->show();
         exprecovs->hide();
+        gamhs->hide();
+
     } else {
         if (mode == Expert || mode == Normal) { // Keep widget hidden in Simple mode
             expgradsh->show();
             exprecovs->show();
         }
+        gamhs->show();
 
         showmaskSHMethod->show();
         showmaskSHMethodinv->hide();

@@ -3146,6 +3146,7 @@ LocallabParams::LocallabSpot::LocallabSpot() :
     s_tonalwidth(30),
     sh_radius(40),
     sensihs(15),
+    gamhs(1.),
     enaSHMask(false),
     CCmaskSHcurve{
         static_cast<double>(FCT_MinMaxCPoints),
@@ -4344,6 +4345,7 @@ bool LocallabParams::LocallabSpot::operator ==(const LocallabSpot& other) const
         && s_tonalwidth == other.s_tonalwidth
         && sh_radius == other.sh_radius
         && sensihs == other.sensihs
+        && gamhs == other.gamhs
         && enaSHMask == other.enaSHMask
         && CCmaskSHcurve == other.CCmaskSHcurve
         && LLmaskSHcurve == other.LLmaskSHcurve
@@ -5985,6 +5987,7 @@ int ProcParams::save(const Glib::ustring& fname, const Glib::ustring& fname2, bo
                     saveToKeyfile(!pedited || spot_edited->s_tonalwidth, "Locallab", "s_tonalwidth_" + index_str, spot.s_tonalwidth, keyFile);
                     saveToKeyfile(!pedited || spot_edited->sh_radius, "Locallab", "sh_radius_" + index_str, spot.sh_radius, keyFile);
                     saveToKeyfile(!pedited || spot_edited->sensihs, "Locallab", "sensihs_" + index_str, spot.sensihs, keyFile);
+                    saveToKeyfile(!pedited || spot_edited->gamhs, "Locallab", "Gamhs_" + index_str, spot.gamhs, keyFile);
                     saveToKeyfile(!pedited || spot_edited->enaSHMask, "Locallab", "EnaSHMask_" + index_str, spot.enaSHMask, keyFile);
                     saveToKeyfile(!pedited || spot_edited->CCmaskSHcurve, "Locallab", "CCmaskSHCurve_" + index_str, spot.CCmaskSHcurve, keyFile);
                     saveToKeyfile(!pedited || spot_edited->LLmaskSHcurve, "Locallab", "LLmaskSHCurve_" + index_str, spot.LLmaskSHcurve, keyFile);
@@ -7824,6 +7827,7 @@ int ProcParams::load(const Glib::ustring& fname, ParamsEdited* pedited)
                 assignFromKeyfile(keyFile, "Locallab", "s_tonalwidth_" + index_str, pedited, spot.s_tonalwidth, spotEdited.s_tonalwidth);
                 assignFromKeyfile(keyFile, "Locallab", "sh_radius_" + index_str, pedited, spot.sh_radius, spotEdited.sh_radius);
                 assignFromKeyfile(keyFile, "Locallab", "sensihs_" + index_str, pedited, spot.sensihs, spotEdited.sensihs);
+                assignFromKeyfile(keyFile, "Locallab", "Gamhs_" + index_str, pedited, spot.gamhs, spotEdited.gamhs);
                 assignFromKeyfile(keyFile, "Locallab", "EnaSHMask_" + index_str, pedited, spot.enaSHMask, spotEdited.enaSHMask);
                 assignFromKeyfile(keyFile, "Locallab", "CCmaskSHCurve_" + index_str, pedited, spot.CCmaskSHcurve, spotEdited.CCmaskSHcurve);
                 assignFromKeyfile(keyFile, "Locallab", "LLmaskSHCurve_" + index_str, pedited, spot.LLmaskSHcurve, spotEdited.LLmaskSHcurve);

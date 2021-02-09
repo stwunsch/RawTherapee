@@ -3877,6 +3877,7 @@ void LocallabContrast::convertParamToSimple()
 
     // Disable all listeners
     disableListener();
+    gamlc->setValue(defSpot.gamlc);
 
     // Set hidden specific GUI widgets in Simple mode to default spot values
     if (defSpot.localcontMethod == "loc") {
@@ -3923,7 +3924,7 @@ void LocallabContrast::updateGUIToMode(const modeType new_type)
             decayw->hide();
             maskusablew->hide();
             maskunusablew->hide();
-
+            gamlc->hide();
             break;
 
         case Normal:
@@ -3945,6 +3946,7 @@ void LocallabContrast::updateGUIToMode(const modeType new_type)
                 maskusablew->hide();
                 maskunusablew->show();
             }
+            gamlc->show();
 
             break;
 
@@ -3961,6 +3963,7 @@ void LocallabContrast::updateGUIToMode(const modeType new_type)
             if (localcontMethod->get_active_row_number() != 1) { // Keep widget hidden when localcontMethod is equal to 1
                 fftwlc->show();
             }
+            gamlc->show();
 
             expmasklc->show();
             exprecovw->show();

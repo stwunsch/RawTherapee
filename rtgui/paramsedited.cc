@@ -1222,6 +1222,7 @@ void ParamsEdited::initFrom(const std::vector<rtengine::procparams::ProcParams>&
                 locallab.spots.at(j).s_tonalwidth = locallab.spots.at(j).s_tonalwidth && pSpot.s_tonalwidth == otherSpot.s_tonalwidth;
                 locallab.spots.at(j).sh_radius = locallab.spots.at(j).sh_radius && pSpot.sh_radius == otherSpot.sh_radius;
                 locallab.spots.at(j).sensihs = locallab.spots.at(j).sensihs && pSpot.sensihs == otherSpot.sensihs;
+                locallab.spots.at(j).gamhs = locallab.spots.at(j).gamhs && pSpot.gamhs == otherSpot.gamhs;
                 locallab.spots.at(j).enaSHMask = locallab.spots.at(j).enaSHMask && pSpot.enaSHMask == otherSpot.enaSHMask;
                 locallab.spots.at(j).CCmaskSHcurve = locallab.spots.at(j).CCmaskSHcurve && pSpot.CCmaskSHcurve == otherSpot.CCmaskSHcurve;
                 locallab.spots.at(j).LLmaskSHcurve = locallab.spots.at(j).LLmaskSHcurve && pSpot.LLmaskSHcurve == otherSpot.LLmaskSHcurve;
@@ -3869,6 +3870,10 @@ void ParamsEdited::combine(rtengine::procparams::ProcParams& toEdit, const rteng
 
         if (locallab.spots.at(i).sensihs) {
             toEdit.locallab.spots.at(i).sensihs = mods.locallab.spots.at(i).sensihs;
+        }
+
+        if (locallab.spots.at(i).gamhs) {
+            toEdit.locallab.spots.at(i).gamhs = mods.locallab.spots.at(i).gamhs;
         }
 
         if (locallab.spots.at(i).enaSHMask) {
@@ -6810,6 +6815,7 @@ LocallabParamsEdited::LocallabSpotEdited::LocallabSpotEdited(bool v) :
     s_tonalwidth(v),
     sh_radius(v),
     sensihs(v),
+    gamhs(v),
     enaSHMask(v),
     CCmaskSHcurve(v),
     LLmaskSHcurve(v),
@@ -7385,6 +7391,7 @@ void LocallabParamsEdited::LocallabSpotEdited::set(bool v)
     s_tonalwidth = v;
     sh_radius = v;
     sensihs = v;
+    gamhs = v;
     enaSHMask = v;
     CCmaskSHcurve = v;
     LLmaskSHcurve = v;

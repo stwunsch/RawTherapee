@@ -449,6 +449,7 @@ private:
     Adjuster* const s_tonalwidth;
     Adjuster* const sh_radius;
     Adjuster* const sensihs;
+    Adjuster* const gamhs;
     Adjuster* const blurSHde;
     MyExpander* const exprecovs;
     Gtk::Label* const maskusables;

@@ -558,6 +558,7 @@ public:
         bool s_tonalwidth;
         bool sh_radius;
         bool sensihs;
+        bool gamhs;
         bool enaSHMask;
         bool CCmaskSHcurve;
         bool LLmaskSHcurve;
