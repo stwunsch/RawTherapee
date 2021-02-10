@@ -13555,30 +13555,6 @@ void ImProcFunctions::Lab_Local(
         int bfw = xend - xstart;
         int bfhr = bfh;
         int bfwr = bfw;
-        float gamma = lp.gamlc;
-        rtengine::GammaValues g_a; //gamma parameters
-        double pwr = 1.0 / lp.gamlc;//default 3.0 - gamma Lab
-        double ts = 9.03296;//always the same 'slope' in the extrem shadows - slope Lab
-        rtengine::Color::calcGamma(pwr, ts, g_a); // call to calcGamma with selected gamma and slope
-
-        if(gamma != 1.f) {
-#ifdef _OPENMP
-#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
-#endif
-                for (int y = 0; y < bfh; ++y) {
-                    int x = 0;
-#ifdef __SSE2__
-                    for (; x < bfw - 3; x += 4) {
-                        STVFU(original->L[y][x], F2V(32768.f) * igammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
-                        STVFU(transformed->L[y][x], F2V(32768.f) * igammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
-                    }
-#endif
-                    for (;x < bfw; ++x) {
-                        original->L[y][x] = 32768.f * igammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
-                        transformed->L[y][x] = 32768.f * igammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
-                    }
-                }
-        }
 
         if (bfw >= mSPwav && bfh >= mSPwav) {//avoid too small spot for wavelet
             if (lp.ftwlc) {
@@ -13798,7 +13774,46 @@ void ImProcFunctions::Lab_Local(
                     const float compress = params->locallab.spots.at(sp).residcomp;
                     const float thres = params->locallab.spots.at(sp).threswav;
 
+                    float gamma = lp.gamlc;
+                    rtengine::GammaValues g_a; //gamma parameters
+                    double pwr = 1.0 / lp.gamlc;//default 3.0 - gamma Lab
+                    double ts = 9.03296;//always the same 'slope' in the extrem shadows - slope Lab
+                    rtengine::Color::calcGamma(pwr, ts, g_a); // call to calcGamma with selected gamma and slope
+
+                    if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                        for (int y = 0; y < tmp1->H; ++y) {
+                        int x = 0;
+#ifdef __SSE2__
+                            for (; x < tmp1->W - 3; x += 4) {
+                            STVFU(tmp1->L[y][x], F2V(32768.f) * igammalog(LVFU(tmp1->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[2]), F2V(g_a[4])));
+                            }
+#endif
+                            for (;x < tmp1->W; ++x) {
+                                tmp1->L[y][x] = 32768.f * igammalog(tmp1->L[y][x] / 32768.f, gamma, ts, g_a[2], g_a[4]);
+                            }
+                        }
+                    }
+
                     wavcontrast4(lp, tmp1->L, tmp1->a, tmp1->b, contrast, radblur, radlevblur, tmp1->W, tmp1->H, level_bl, level_hl, level_br, level_hr, sk, numThreads, locwavCurve, locwavutili, wavcurve, loclevwavCurve, loclevwavutili, wavcurvelev, locconwavCurve, locconwavutili, wavcurvecon, loccompwavCurve, loccompwavutili, wavcurvecomp, loccomprewavCurve, loccomprewavutili, wavcurvecompre, locedgwavCurve, locedgwavutili, sigma, offs, maxlvl, sigmadc, deltad, chrol, chrobl, blurlc, blurena, levelena, comprena, compreena, compress, thres);
+                    if(gamma != 1.f) {
+#ifdef _OPENMP
+#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
+#endif
+                        for (int y = 0; y < tmp1->H; ++y) {//apply inverse gamma 3.f and put result in range 32768.f
+                            int x = 0;
+#ifdef __SSE2__
+                            for (; x < tmp1->W - 3; x += 4) {
+                                STVFU(tmp1->L[y][x], F2V(32768.f) * gammalog(LVFU(tmp1->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
+                            }
+#endif
+                            for (; x < tmp1->W; ++x) {
+                                tmp1->L[y][x] = 32768.f * gammalog(tmp1->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
+                            }
+                        }
+                    }
 
                     const float satur = params->locallab.spots.at(sp).residchro;
 
@@ -13977,24 +13992,6 @@ void ImProcFunctions::Lab_Local(
 
                 transit_shapedetect2(call, 10, bufgb.get(), tmp1.get(), originalmasklc.get(), hueref, chromaref, lumaref, sobelref, 0.f, nullptr, lp, original, transformed, cx, cy, sk);
                 tmp1.reset();
-            }
-            if(gamma != 1.f) {
-#ifdef _OPENMP
-#   pragma omp parallel for schedule(dynamic,16) if (multiThread)
-#endif
-                for (int y = 0; y < bfh; ++y) {//apply inverse gamma 3.f and put result in range 32768.f
-                    int x = 0;
-#ifdef __SSE2__
-                    for (; x < bfw - 3; x += 4) {
-                        STVFU(original->L[y][x], F2V(32768.f) * gammalog(LVFU(original->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
-                        STVFU(transformed->L[y][x], F2V(32768.f) * gammalog(LVFU(transformed->L[y][x]) / F2V(32768.f), F2V(gamma), F2V(ts), F2V(g_a[3]), F2V(g_a[4])));
-                    }
-#endif
-                    for (; x < bfw; ++x) {
-                        original->L[y][x] = 32768.f * gammalog(original->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
-                        transformed->L[y][x] = 32768.f * gammalog(transformed->L[y][x] / 32768.f, gamma, ts, g_a[3], g_a[4]);
-                    }
-                }
             }
 
             if (params->locallab.spots.at(sp).recurs) {

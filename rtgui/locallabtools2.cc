@@ -2323,7 +2323,7 @@ LocallabContrast::LocallabContrast():
     residshathr(Gtk::manage(new Adjuster(M("TP_LOCALLAB_RESIDSHATHR"), 0., 100., 1., 30.))),
     residhi(Gtk::manage(new Adjuster(M("TP_LOCALLAB_RESIDHI"), -100., 100., 1., 0.))),
     residhithr(Gtk::manage(new Adjuster(M("TP_LOCALLAB_RESIDHITHR"), 0., 100., 1., 70.))),
-    gamlc(Gtk::manage(new Adjuster(M("TP_LOCALLAB_GAMC"), 0.7, 1.3, 0.05, 1.))),
+    gamlc(Gtk::manage(new Adjuster(M("TP_LOCALLAB_GAMC"), 0.33, 2., 0.01, 1.))),
     sensilc(Gtk::manage(new Adjuster(M("TP_LOCALLAB_SENSI"), 0, 100, 1, 60))),
     clariFrame(Gtk::manage(new Gtk::Frame(M("TP_LOCALLAB_CLARIFRA")))),
     clarilres(Gtk::manage(new Adjuster(M("TP_LOCALLAB_CLARILRES"), -20., 100., 0.5, 0.))),
@@ -2653,7 +2653,7 @@ LocallabContrast::LocallabContrast():
     mask2lcCurveEditorG->curveListComplete();
 
     // Add Local contrast specific widgets to GUI
-    pack_start(*gamlc);
+//    pack_start(*gamlc);
     pack_start(*sensilc);
     pack_start(*localcontMethod);
     pack_start(*lcradius);
@@ -2750,6 +2750,7 @@ LocallabContrast::LocallabContrast():
     blurlevelFrame->add(*blurlevcontBox);
     blurcontBox->pack_start(*blurlevelFrame);
     expcontrastpyr->add(*blurcontBox, false);
+    pack_start(*gamlc);
     pack_start(*expcontrastpyr);
     ToolParamBlock* const blurcontBox2 = Gtk::manage(new ToolParamBlock());
     Gtk::Frame* const contFrame2 = Gtk::manage(new Gtk::Frame(M("TP_LOCALLAB_CONTFRA")));
@@ -3801,6 +3802,7 @@ void LocallabContrast::convertParamToNormal()
 
     // Disable all listeners
     disableListener();
+    gamlc->setValue(defSpot.gamlc);
 
     // Set hidden GUI widgets in Normal mode to default spot values
     origlc->set_active(defSpot.origlc);
@@ -3946,7 +3948,7 @@ void LocallabContrast::updateGUIToMode(const modeType new_type)
                 maskusablew->hide();
                 maskunusablew->show();
             }
-            gamlc->show();
+            gamlc->hide();
 
             break;
 

@@ -946,7 +946,7 @@ void LocallabColor::updateAdviceTooltips(const bool showTooltips)
 {
     if (showTooltips) {
         lumFrame->set_tooltip_text(M("TP_LOCALLAB_EXPCOLOR_TOOLTIP"));
-        gamc->set_tooltip_text(M("TP_LOCALLAB_GAMC_TOOLTIP"));
+        gamc->set_tooltip_text(M("TP_LOCALLAB_GAMCOL_TOOLTIP"));
         lightness->set_tooltip_text(M("TP_LOCALLAB_LIGHTN_TOOLTIP"));
         gridMethod->set_tooltip_text(M("TP_LOCALLAB_GRIDMETH_TOOLTIP"));
         strengthgrid->set_tooltip_text(M("TP_LOCALLAB_STRENGRID_TOOLTIP"));
@@ -2835,7 +2835,7 @@ void LocallabExposure::updateAdviceTooltips(const bool showTooltips)
 //        fatFrame->set_tooltip_text(M("TP_LOCALLAB_FATFRAME_TOOLTIP"));
         expfat->set_tooltip_text(M("TP_LOCALLAB_FATFRAME_TOOLTIP"));
         expcomp->set_tooltip_text(M("TP_LOCALLAB_EXPCOMP_TOOLTIP"));
-        gamex->set_tooltip_text(M("TP_LOCALLAB_GAMC_TOOLTIP"));
+        gamex->set_tooltip_text(M("TP_LOCALLAB_GAMCOL_TOOLTIP"));
         sensiex->set_tooltip_text(M("TP_LOCALLAB_SENSI_TOOLTIP"));
         structexp->set_tooltip_text(M("TP_LOCALLAB_STRUCT_TOOLTIP"));
         expchroma->set_tooltip_text(M("TP_LOCALLAB_EXPCHROMA_TOOLTIP"));
