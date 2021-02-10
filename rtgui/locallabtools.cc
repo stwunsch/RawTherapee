@@ -781,10 +781,10 @@ LocallabColor::LocallabColor():
 
     // Add Color & Light specific widgets to GUI
     ToolParamBlock* const lumBox = Gtk::manage(new ToolParamBlock());
-    lumBox->pack_start(*gamc);
     lumBox->pack_start(*lightness);
     lumBox->pack_start(*contrast);
     lumBox->pack_start(*chroma);
+    lumBox->pack_start(*gamc);
     lumFrame->add(*lumBox);
     pack_start(*lumFrame);
     Gtk::Frame* const superFrame = Gtk::manage(new Gtk::Frame());
@@ -2730,8 +2730,8 @@ LocallabExposure::LocallabExposure():
     expfat->add(*fatBox, false);
 //    pack_start(*fatFrame);
     pack_start(*expfat);
-    pack_start(*gamex);
     pack_start(*expcomp);
+    pack_start(*gamex);
     pack_start(*sensiex);
     pack_start(*structexp);
     pack_start(*blurexpde);
@@ -3992,7 +3992,7 @@ LocallabShadow::LocallabShadow():
     pack_start(*shadows);
     pack_start(*s_tonalwidth);
     pack_start(*sh_radius);
-    pack_start(*gamhs);
+    //pack_start(*gamhs);
     // pack_start(*sensihs);
     pack_start(*blurSHde);
     ToolParamBlock* const shBox3 = Gtk::manage(new ToolParamBlock());
