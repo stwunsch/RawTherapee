@@ -1860,6 +1860,7 @@ void LocallabColor::convertParamToNormal()
 
     // Disable all listeners
     disableListener();
+    gamc->setValue(defSpot.gamc);
 
     // Set hidden GUI widgets in Normal mode to default spot values
     blurcolde->setValue((double)defSpot.blurcolde);
@@ -2069,7 +2070,7 @@ void LocallabColor::updateGUIToMode(const modeType new_type)
             if (!invers->get_active()) { // Keep widget hidden when invers is toggled
                 expgradcol->show();
                 exprecov->show();
-                gamc->show();
+                gamc->hide();
             }
 
             expcurvcol->show();
@@ -3451,6 +3452,7 @@ void LocallabExposure::convertParamToNormal()
 
     // Disable all listeners
     disableListener();
+    gamex->setValue(defSpot.gamex);
 
     // Set hidden GUI widgets in Normal mode to default spot values
     structexp->setValue((double)defSpot.structexp);
@@ -3538,7 +3540,7 @@ void LocallabExposure::updateGUIToMode(const modeType new_type)
                 expgradexp->show();
                 softradiusexp->show();
                 exprecove->show();
-                gamex->show();
+                gamex->hide();
             }
 
             expmaskexp->show();

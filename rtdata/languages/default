@@ -2697,6 +2697,7 @@ TP_LOCALLAB_FFTWBLUR;ƒ - Always Use Fast Fourier Transform
 TP_LOCALLAB_FULLIMAGE;Dark-Ev & white-Ev for the whole image 
 TP_LOCALLAB_FULLIMAGELOG_TOOLTIP;Calculates the Ev levels for the whole image.
 TP_LOCALLAB_GAM;Gamma
+TP_LOCALLAB_GAMW;Gamma (wavelet pyramids)
 TP_LOCALLAB_GAMC;Gamma
 TP_LOCALLAB_GAMCOL_TOOLTIP;Apply a gamma on Luminance L*a*b* datas
 TP_LOCALLAB_GAMC_TOOLTIP;Apply a gamma on Luminance L*a*b* datas before and after treatment Pyramid 1 and Pyramid 2

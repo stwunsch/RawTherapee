@@ -43,7 +43,10 @@
 
 namespace
 {
-
+constexpr float clipL(float x)
+{
+return rtengine::LIM(x, 100.f, 65535.f);
+}
 void boxblur2(const float* const* src, float** dst, float** temp, int startY, int startX, int H, int W, int bufferW, int box)
 {
     constexpr int numCols = 16;
@@ -959,13 +962,18 @@ void RawImageSource::HLRecovery_inpaint(float** red, float** green, float** blue
         rescaleNearest(rsrc, rbuf, true);
         rescaleNearest(gsrc, gbuf, true);
         rescaleNearest(bsrc, bbuf, true);
+        LUTf gamma(65536);
+        for (int i = 0; i < 65536; ++i) {
+            gamma[i] = pow_F(float(i)/65535.f, 2.2f);
+        }
 
 #ifdef _OPENMP
 #       pragma omp parallel for
 #endif
         for (int y = 0; y < H2; ++y) {
             for (int x = 0; x < W2; ++x) {
-                guide[y][x] = Color::igamma_srgb(Color::rgbLuminance(static_cast<double>(rbuf[y][x]), static_cast<double>(gbuf[y][x]), static_cast<double>(bbuf[y][x]), ws));
+                guide[y][x] = gamma[CLIP(Color::rgbLuminance(static_cast<double>(rbuf[y][x]), static_cast<double>(gbuf[y][x]), static_cast<double>(bbuf[y][x]), imatrices.xyz_cam))];
+ //               guide[y][x] = gamma[CLIP(Color::rgbLuminance(rbuf[y][x], gbuf[y][x], bbuf[y][x], imatrices.xyz_cam))];
             }
         }
     }
