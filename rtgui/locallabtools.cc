@@ -7815,6 +7815,7 @@ void LocallabBlur::convertParamToNormal()
     csThresholdblur->setValue<int>(defSpot.csthresholdblur);
     lnoiselow->setValue(defSpot.lnoiselow);
     nlrad->setValue(defSpot.nlrad);
+    noisegam->setValue(defSpot.noisegam);
     
     // Enable all listeners
     enableListener();
@@ -7925,7 +7926,7 @@ void LocallabBlur::updateGUIToMode(const modeType new_type)
             nlpat->show();
             nlrad->hide();
             nlgam->show();
-            noisegam->show();
+            noisegam->hide();
 
             if (blMethod->get_active_row_number() == 2) {
                 expdenoise2->show();
