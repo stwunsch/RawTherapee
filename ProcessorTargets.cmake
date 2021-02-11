@@ -6,7 +6,7 @@ set(PROC_TARGET_1_FLAGS "-mtune=generic" CACHE STRING "Processor-1 flags")
 
 # This second choice should be used for your own build only
 set(PROC_TARGET_2_LABEL native CACHE STRING "Processor-2 label - use it for your own build")
-set(PROC_TARGET_2_FLAGS "-march=native" CACHE STRING "Processor-2 flags")
+set(PROC_TARGET_2_FLAGS "-mcpu=native" CACHE STRING "Processor-2 flags")
 
 # The later choices is intended to be used if you want to provide specific builds, but it should match your own processor
 # You can cross compile but you have to know what you're doing, this mechanism has not been designed for that
